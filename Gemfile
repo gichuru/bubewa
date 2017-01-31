@@ -36,3 +36,4 @@ gem 'carrierwave'
 gem "fog"
 gem "mini_magick"
 gem 'devise'
+gem 'figaro'

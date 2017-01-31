@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BubewaApp</title>
+    <title>Bubewa : Yelp for Kenya</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -12,8 +12,15 @@
       <body>
          <%= render 'layouts/header' %>
           <div class="container">
-             <p class="notice"><%= notice %></p>
-              <p class="alert"><%= alert %></p>
+
+            <% flash.each do |name, msg| %>
+            <% if msg.is_a?(String) %>
+              <div class="alert alert alert-success -<%= name.to_s == :notice ? "success" : "danger" %> alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <%= content_tag :div, msg, :id => "flash_#{name}" %>
+              </div>
+            <% end %>
+          <% end %>
  
           <!-- Start footer here -->
           <%= yield %> 

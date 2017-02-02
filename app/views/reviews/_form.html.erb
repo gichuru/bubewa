@@ -1,8 +1,11 @@
 <%= form_for([@listing, @review]) do |f| %>
 
+
   <% if review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+    <div id="error_explanation" class= "alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      
+      <h4>opps! sorry, <%= pluralize(review.errors.count, "error") %> prohibited your review from being saved:</h4>
 
       <ul>
       <% review.errors.full_messages.each do |message| %>

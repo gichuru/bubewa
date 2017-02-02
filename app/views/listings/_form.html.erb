@@ -12,39 +12,40 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :image %>
-    <%= f.file_field :image, class: "form-control" %>
-  </div>
-
-
-  <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "enter name, i.e Agha Khan Hospital, " %>
   </div>
 
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description, class: "form-control" %>
+    <%= f.text_area :description, class: "form-control", placeholder: "give a description of who this is, what do they do, you can copy from their website, about us page, linkedin, wikipedia etc" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :address %>
-    <%= f.text_field :address, class: "form-control" %>
+    <%= f.label :location %>
+    <%= f.text_field :address, class: "form-control", placeholder: "Type the companys location, example Bishop Magua Centre, Ngong Rd, Nairobi, Kenya" %>
   </div>
 
   <div class="form-group">
     <%= f.label :phone %>
-    <%= f.text_field :phone, class: "form-control" %>
+    <%= f.text_field :phone, class: "form-control", placeholder: "Enter phone number, i.e 020-21212 or 0722123456" %>
   </div>
 
   <div class="form-group">
     <%= f.label :email %>
-    <%= f.text_field :email, class: "form-control" %>
+    <%= f.text_field :email, class: "form-control", placeholder: "enter email i.e xyz@xyz.com" %>
   </div>
 
   <div class="form-group">
     <%= f.label :website %>
-    <%= f.text_field :website, class: "form-control" %>
+    <%= f.text_field :website, class: "form-control", placeholder: "must include http:// or https://, example: http://www.bubewa.com" %>
+  </div>
+
+  <div class="form-group">
+
+    <%= f.label :Add_Photo %>
+    <%= f.file_field :image, class: "form-control" %>
+
   </div>
 
   <div class="actions">

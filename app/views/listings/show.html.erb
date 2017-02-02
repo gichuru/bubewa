@@ -39,9 +39,22 @@
     <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-primary align-right" %> <br><br>
 
       <table class="table">
+        <thead>
+            <tr>
+              <th class="col-md-3"></th>
+              <th class="col-md-9"></th>
+            </tr>
+          </thead>
+
           <tbody>
             <% @reviews.each do |review| %>
               <tr>
+                <td>
+                  <h4>
+                    <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
+                  </h4>
+                  <p class = "small"><%= review.created_at.strftime("%B, %d, %Y") %></p>
+                </td>
                 <td>
                   <div class="star-rating" data-score= <%= review.rating %> ></div>
                   <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
@@ -49,6 +62,7 @@
               </tr>
             <% end %>
           </tbody>
+
         </table>
 
   </div>

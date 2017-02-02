@@ -36,7 +36,7 @@
 
   </div>
   <div class="col-md-9">
-    <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-primary align-right" %> <br><br>
+    <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-primary btn-right" %> <br><br>
 
       <table class="table">
         <thead>
@@ -45,10 +45,14 @@
               <th class="col-md-9"></th>
             </tr>
           </thead>
-
+           
           <tbody>
+             <% if @reviews.blank? %>
+             <tr>
+                <p>No reviews yet. Be the first to write one!</p>
+          <% else %>
             <% @reviews.each do |review| %>
-              <tr>
+              
                 <td>
                   <h4>
                     <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
@@ -58,8 +62,17 @@
                 <td>
                   <div class="star-rating" data-score= <%= review.rating %> ></div>
                   <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
+                  
+                <% if user_signed_in? %>
+                  <% if (review.user == current_user) || (current_user.admin?) %>
+                    <%= link_to "Edit", edit_listing_review_path(@listing, review) %>
+                    <%= link_to "Delete", listing_review_path(@listing, review), method: :delete %>
+                  <% end %>
+                <% end %>
+
                 </td>
               </tr>
+            <% end %>
             <% end %>
           </tbody>
 
@@ -68,10 +81,9 @@
   </div>
 </div>
 
-
-
-
+<% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-link" %> |
+<% end %>
 <%= link_to 'Back', listings_path, class: "btn btn-link" %>
 
 <!--The script for star ratings. -->

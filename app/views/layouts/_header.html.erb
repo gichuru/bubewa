@@ -11,7 +11,9 @@
       <%= link_to "Bubewa", root_path, class: "navbar-brand" %>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- Here are our static pages  -->
+
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "About", pages_about_path %></li>
@@ -20,8 +22,15 @@
       </ul>
 
       <!-- This is the right navigation -->
+
+      <!-- Lets ensure a user is an admin before we allow them to add a Listing -->
+
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'Add a New Listing', new_listing_path, class: "btn btn-default btn-sm" %></li>
+       <li> <% if user_signed_in? && current_user.admin? %>
+          <%= link_to 'Add New Listing', new_listing_path, class: "btn btn-default btn-sm" %>
+        <% end %> </li>
+
+<!-- Below are the login in buttons, best to have them in drop down. -->
 
         <% if user_signed_in? %>
 

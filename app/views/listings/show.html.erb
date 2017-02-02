@@ -1,15 +1,11 @@
-<p id="notice"><%= notice %></p>
 
-<%= image_tag @listing.image_url %>
-
-<p>
-  <strong>Name:</strong>
-  <%= @listing.name %>
-</p>
+<div class="row">
+  <div class="col-md-3">
+    <%= image_tag @listing.image_url %>
 
 <p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
+  <h3><%= @listing.name %></h3>
+  
 </p>
 
 <p>
@@ -24,13 +20,36 @@
 
 <p>
   <strong>Email:</strong>
-  <%= @listing.email %>
+  <%= mail_to @listing.email %>
 </p>
 
 <p>
   <strong>Website:</strong>
-  <%= @listing.website %>
+  <%= link_to @listing.website, @listing.website %>
 </p>
+<hr>
+<p>
+  <strong>Description:</strong>
+  <%= @listing.description %>
+</p>
+
+  </div>
+  <div class="col-md-9">
+    <%= link_to "Write Review", new_listing_review_path(@listing), class: "btn btn-primary" %>
+    <hr>
+      <% if @reviews.blank? %>
+           <i>No reviews yet. Be the first to write one!</i>
+        <% else %>
+          <% @reviews.each do |review| %>
+            <p><%= review.rating %></p>
+            <p><%= review.comment %></p>
+        <% end %>
+      <% end %>
+  </div>
+</div>
+
+
+
 
 <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-link" %> |
 <%= link_to 'Back', listings_path, class: "btn btn-link" %>

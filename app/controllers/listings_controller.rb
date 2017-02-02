@@ -50,6 +50,11 @@ class ListingsController < ApplicationController
       end
     end
   end
+  
+  # Show the reviews under each restaurant.
+    def show
+      @reviews = Review.where(listing_id: @listing.id)
+    end
 
   # DELETE /listings/1
   # DELETE /listings/1.json

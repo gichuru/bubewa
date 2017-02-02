@@ -19,7 +19,7 @@
     <% @listings.each do |listing| %>
       <tr>
         <td><%= image_tag listing.image_url unless listing.image.blank? %></td>
-        <td><%= listing.name %></td>
+        <td><%= link_to listing.name, listing %></td>
         <td><%= listing.description %></td>
         <td><%= listing.address %></td>
         <td><%= listing.phone %></td>

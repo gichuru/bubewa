@@ -11,8 +11,8 @@ class ListingsController < ApplicationController
 
   # GET /listings/1
   # GET /listings/1.json
-  def show
-  end
+  #def show
+  #end
 
   # GET /listings/new
   def new
@@ -54,6 +54,7 @@ class ListingsController < ApplicationController
   end
   
   # Show the reviews under each restaurant by decending order, also takes care of the blank reviews.
+    
     def show
       @reviews = Review.where(listing_id: @listing.id).order("created_at DESC")
       if @reviews.blank?

@@ -5,8 +5,9 @@
 
 <p>
   <h3><%= @listing.name %></h3>
-  
 </p>
+<div class="star-rating" data-score= <%= @avg_rating %> ></div>
+<i><%= "#{@reviews.length} reviews" %></i>
 
 <p>
   <strong>Address:</strong>
@@ -30,21 +31,26 @@
 <hr>
 <p>
   <strong>Description:</strong>
-  <%= @listing.description %>
+  <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
 </p>
 
   </div>
   <div class="col-md-9">
-    <%= link_to "Write Review", new_listing_review_path(@listing), class: "btn btn-primary" %>
-    <hr>
-      <% if @reviews.blank? %>
-           <i>No reviews yet. Be the first to write one!</i>
-        <% else %>
-          <% @reviews.each do |review| %>
-            <div class="star-rating"></div>
-            <p><%= review.comment %></p>
-        <% end %>
-      <% end %>
+    <%= link_to "Write Review", new_listing_review_path(@listing), class: "btn btn-primary align-right" %> <br><br>
+
+      <table class="table">
+          <tbody>
+            <% @reviews.each do |review| %>
+              <tr>
+                <td>
+                  <div class="star-rating" data-score= <%= review.rating %> ></div>
+                  <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
   </div>
 </div>
 
@@ -54,6 +60,14 @@
 <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-link" %> |
 <%= link_to 'Back', listings_path, class: "btn btn-link" %>
 
+<!--The script for star ratings. -->
+
 <script>
-  $('.star-rating').raty();
+  $('.star-rating').raty({
+    path: 'https://s3.eu-west-2.amazonaws.com/bebuwaphotos/uploads/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
 </script>

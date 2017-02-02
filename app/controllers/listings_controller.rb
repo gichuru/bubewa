@@ -51,10 +51,16 @@ class ListingsController < ApplicationController
     end
   end
   
-  # Show the reviews under each restaurant.
+  # Show the reviews under each restaurant by decending order, also takes care of the blank reviews.
     def show
-      @reviews = Review.where(listing_id: @listing.id)
+      @reviews = Review.where(listing_id: @listing.id).order("created_at DESC")
+      if @reviews.blank?
+        @avg_rating = 0
+      else
+        @avg_rating = @reviews.average(:rating).round(2)
+      end
     end
+
 
   # DELETE /listings/1
   # DELETE /listings/1.json

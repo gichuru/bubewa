@@ -20,6 +20,7 @@
       <tr>
         <td><%= image_tag listing.image_url unless listing.image.blank? %></td>
         <td><%= link_to listing.name, listing %></td>
+        <!--<td><div class="star-rating" data-score= <%= @avg_rating %> ></div></td> --> 
         <td><%= listing.description %></td>
         <td><%= listing.address %></td>
         <td><%= listing.phone %></td>
@@ -32,6 +33,16 @@
     <% end %>
   </tbody>
 </table>
+
+<script>
+  $('.star-rating').raty({
+    path: 'https://s3.eu-west-2.amazonaws.com/bebuwaphotos/uploads/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>
 
 <br>
 

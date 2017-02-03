@@ -19,6 +19,15 @@ class ListingsController < ApplicationController
     @listing = Listing.new
   end
 
+  def avg_rating
+    @reviews = Review.where(listing_id: @listing.id)
+      if @reviews.blank?
+        @avg_rating = 0
+      else
+        @avg_rating = @reviews.average(:rating).round(2)
+      end
+  end
+
   # GET /listings/1/edit
   def edit
   end

@@ -8,14 +8,18 @@
             <div class="thumbnail">
               <%= image_tag listing.image_url unless listing.image.blank? %>
               <div class="caption">
-                <h4><%= link_to listing.name, listing %></h4>
+                <strong><%= link_to listing.name, listing %></strong>
+                <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
+               
+              <div class="star-rating"><%= @avg_rating  %></div>
 
- <div class="star-rating" data-score= <%= @avg_rating %> ></div>
-                   
-                <%= link_to 'Read/post review', listing %>
+
+                <!-- Editing links --> 
+                <hr>  
+                <%= link_to 'Post Review', listing, class: "btn btn-info"  %>
                   <% if user_signed_in? && current_user.admin? %>
-                      <%= link_to 'Edit', edit_listing_path(listing) %>
-                      <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %>
+                      <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
+                     <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p> 
               <% end %>
              
               </div>

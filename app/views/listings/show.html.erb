@@ -6,28 +6,19 @@
 <p>
   <h3><%= @listing.name %></h3>
 </p>
-<div class="star-rating" data-score= <%= @avg_rating %> ></div>
-<i><%= "#{@reviews.length} reviews" %></i>
+<div class="star-rating" data-score= <%= @avg_rating  %> ></div>
+<i><%= "#{@reviews.length} reviews" %></i> <br><br>
 
-<p>
+<address>
   <strong>Address:</strong>
-  <%= @listing.address %>
-</p>
-
-<p>
+  <%= @listing.address %><br>
   <strong>Phone:</strong>
-  <%= @listing.phone %>
-</p>
-
-<p>
+  <%= @listing.phone %><br>
   <strong>Email:</strong>
-  <%= mail_to @listing.email %>
-</p>
-
-<p>
+  <%= mail_to @listing.email %> <br>
   <strong>Website:</strong>
   <%= link_to @listing.website, @listing %>
-</p>
+</address>
 <hr>
 <p>
   <strong>Description:</strong>

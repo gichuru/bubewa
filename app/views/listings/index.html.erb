@@ -4,14 +4,14 @@
 
 <div class="row">
   <% @listings.each do |listing| %>
-    <div class="col-md-2">
+    <div class="col-md-3">
             <div class="thumbnail">
-              <%= image_tag listing.image_url unless listing.image.blank? %>
+              <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
               <div class="caption">
                 <strong><%= link_to listing.name, listing %></strong>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
                
-              <div class="star-rating"><%= @avg_rating  %></div>
+              <div class="star-rating"><%= @avg_review %></div>
 
 
                 <!-- Editing links --> 

@@ -3,6 +3,7 @@
   <div class="col-md-3">
     <%= image_tag @listing.image_url (:medium) %>
       <h3><%= @listing.name %></h3>
+      <p class="small"> <%= @listing.title %></p>
         <div class="star-rating" data-score= <%= @avg_rating  %> ></div>
           <p class="small"><%= "#{@reviews.length} reviews" %></p>
           <address>

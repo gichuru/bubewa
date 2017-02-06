@@ -8,15 +8,23 @@
               <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
               <div class="caption">
                 <strong><%= link_to listing.name, listing %></strong>
-                <p class = "small"><%= listing.title %>    <br>
-                  
-                  Posted: <%= time_ago_in_words(listing.created_at) %> ago </p>
+                <p class = "small"><%= listing.title %></p>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
+                <% reviews = Review.where(listing_id: listing.id).order("created_at DESC") %>
+                    <% if reviews.blank? %>
+                    <% avg_rating = 0 %>
+                    <% else %>
+                    <% avg_rating = reviews.average(:rating).round(2) %>
+                    <% end %>
+
+                    <div class="star-rating" data-score= <%= avg_rating %> ></div>
+                    <strong>Average score: </strong> <kbd><%= avg_rating  %>/5 </kbd> <br>
+                   <p class ="small"> read <%= link_to "#{reviews.length} reviews", listing %></p>
                     
 
                 <!-- Editing links --> 
                 <hr>  
-                <%= link_to 'See Reviews', listing, class: "btn btn-info"  %>
+                <%= link_to 'Post Your Review', listing, class: "btn btn-info"  %>
                   <% if user_signed_in? && current_user.admin? %>
                       <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
                      <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p> 

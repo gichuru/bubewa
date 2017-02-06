@@ -50,14 +50,16 @@
                       <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
 
                       <p class="navbar-right small">
+
+                        <!--Uncomment to unable voting -->
                         
-                      <%= link_to listing_review_upvote_path(@listing, review), method: :put do%>
+                      <!--<%= link_to listing_review_upvote_path(@listing, review), method: :put do%>
                       <span class="glyphicon glyphicon-thumbs-up"> <%= review.get_upvotes.size %></span> 
                       <% end %>.
-                      
+
                       <%= link_to listing_review_downvote_path(@listing, review), method: :put do%>
                       <span class="glyphicon glyphicon-thumbs-down"> <%= review.get_downvotes.size %></span> 
-                      <% end %>
+                      <% end %>-->
                         
                         </p>
 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :reviews, except: [:show, :index, :upvote, :downvote] do
       put "upvote", to: "reviews#upvote"
       put "downvote", to: "reviews#downvote"
+      resources :user
     end
   end
 

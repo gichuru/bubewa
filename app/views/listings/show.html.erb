@@ -49,6 +49,18 @@
                       <div class="star-rating" data-score= <%= review.rating %> ></div>
                       <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
 
+                      <p class="navbar-right small">
+                        
+                      <%= link_to listing_review_upvote_path(@listing, review), method: :put do%>
+                      <span class="glyphicon glyphicon-thumbs-up"> <%= review.get_upvotes.size %></span> 
+                      <% end %>.
+                      
+                      <%= link_to listing_review_downvote_path(@listing, review), method: :put do%>
+                      <span class="glyphicon glyphicon-thumbs-down"> <%= review.get_downvotes.size %></span> 
+                      <% end %>
+                        
+                        </p>
+
                      
 
                       <!-- Check if user is signed in, to enable edit and update -->

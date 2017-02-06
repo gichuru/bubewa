@@ -9,14 +9,13 @@
               <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
               <div class="caption">
                 <strong><%= link_to listing.name, listing %></strong>
+                <p class = "small">Posted: <%= time_ago_in_words(listing.created_at) %> ago </p>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
-               
-              <div class="star-rating"><%= @avg_review %></div>
-
+                <%= listing.description %>       
 
                 <!-- Editing links --> 
                 <hr>  
-                <%= link_to 'Post Review', listing, class: "btn btn-info"  %>
+                <%= link_to 'See Reviews', listing, class: "btn btn-info"  %>
                   <% if user_signed_in? && current_user.admin? %>
                       <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
                      <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p> 

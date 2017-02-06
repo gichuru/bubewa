@@ -1,21 +1,9 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user! 
   before_action :set_listing
-  before_action :set_review, only: [:edit, :update, :destroy]
+  before_action :set_review, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :check_user, only: [:edit, :update, :destroy]
 
-  # GET /reviews
-  # GET /reviews.json
-
-
-  def index
-    @reviews = Review.all
-  end
-
-  # GET /reviews/1
-  # GET /reviews/1.json
-  def show
-  end
 
   # GET /reviews/new
   def new
@@ -26,6 +14,20 @@ class ReviewsController < ApplicationController
   def edit
   end
 
+  #Added the def upvote and downvote
+  def upvote
+    @review = Review.find(params[:id])
+    @review.upvote_from current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @review = Review.find(params[:id])
+    @review.downvote_from current_user
+    redirect_to :back
+  end
+
+
   # POST /reviews
   # POST /reviews.json
   def create
@@ -34,22 +36,23 @@ class ReviewsController < ApplicationController
     @review.listing_id = @listing.id
 
     respond_to do |format|
-      if @review.save
-        format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+        if @review.save
+          format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
+          format.json { render :show, status: :created, location: @review }
+        else
+          format.html { render :new }
+          format.json { render json: @review.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
 
   # PATCH/PUT /reviews/1
   # PATCH/PUT /reviews/1.json
   def update
     respond_to do |format|
+
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Your Review was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Your Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
@@ -74,11 +77,16 @@ class ReviewsController < ApplicationController
       @review = Review.find(params[:id])
     end
 
+    #Check user
+
      def check_user
       unless (@review.user == current_user) || (current_user.admin?)
         redirect_to root_url, alert: "Sorry, this review belongs to someone else, you can only edit reviews you have posted."
       end
     end
+
+
+    #set listing
 
     def set_listing
       @listing = Listing.find(params[:listing_id])

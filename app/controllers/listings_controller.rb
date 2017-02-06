@@ -6,27 +6,18 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    @listings = Listing.all 
   end
 
   # GET /listings/1
   # GET /listings/1.json
-  #def show
-  #end
+
 
   # GET /listings/new
   def new
     @listing = Listing.new
   end
 
-  def avg_rating
-    @reviews = Review.where(listing_id: @listing.id)
-      if @reviews.blank?
-        @avg_rating = 0
-      else
-        @avg_rating = @reviews.average(:rating).round(2)
-      end
-  end
 
   # GET /listings/1/edit
   def edit
@@ -53,7 +44,7 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
+        format.html { redirect_to @reviews, notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
       else
         format.html { render :edit }

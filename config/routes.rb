@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :listings do
-    resources :reviews, except: [:show, :index]
+    resources :reviews, except: [:show, :index, :upvote, :downvote] do
+      put "upvote", to: "reviews#upvote"
+      put "downvote", to: "reviews#downvote"
+    end
   end
 
-  
   get 'pages/about'
 
   get 'pages/how'

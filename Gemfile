@@ -37,3 +37,4 @@ gem "fog"
 gem "mini_magick"
 gem 'devise'
 gem 'figaro'
+gem 'acts_as_votable', '~> 0.10.0'

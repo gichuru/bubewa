@@ -2,64 +2,58 @@
 <div class="row">
   <div class="col-md-3">
     <%= image_tag @listing.image_url (:medium) %>
-
-<p>
-  <h3><%= @listing.name %></h3>
-</p>
-<div class="star-rating" data-score= <%= @avg_rating  %> ></div>
-<p class="small"><%= "#{@reviews.length} reviews" %></p>
-
-<address>
-  <strong>Address:</strong>
-  <%= @listing.address %><br>
-  <strong>Phone:</strong>
-  <%= @listing.phone %><br>
-  <strong>Email:</strong>
-  <%= mail_to @listing.email %> <br>
-  <strong>Website:</strong>
-  <%= link_to @listing.website, @listing %>
-</address>
-<hr>
-<p>
-  <strong>About:</strong>
-  <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
-</p>
-
+      <h3><%= @listing.name %></h3>
+        <div class="star-rating" data-score= <%= @avg_rating  %> ></div>
+          <p class="small"><%= "#{@reviews.length} reviews" %></p>
+          <address>
+            <strong>Address:</strong>
+            <%= @listing.address %><br>
+            <strong>Phone:</strong>
+            <%= @listing.phone %><br>
+            <strong>Email:</strong>
+            <%= mail_to @listing.email %> <br>
+            <strong>Website:</strong>
+            <%= link_to @listing.website, @listing %>
+          </address>
+        <hr>
+          <p>
+            <strong>About:</strong>
+            <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
+          </p>
   </div>
   <div class="col-md-9">
     <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-info" %> <br><br>
-
       <table class="table">
         <thead>
             <tr>
               <th class="col-md-3"></th>
               <th class="col-md-9"></th>
             </tr>
-          </thead>
-           
+          </thead>           
           <tbody>
              <% if @reviews.blank? %>
              <tr>
-                <p>No reviews yet. Be the first to write one!</p>
-          <% else %>
-            <% @reviews.each do |review| %>
-              
-                <td>
-                  <h4>
-                    <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
-                  </h4>
-                  <p class = "small"><%= review.created_at.strftime("%B, %d, %Y") %></p>
-                </td>
-                <td>
-                  <div class="star-rating" data-score= <%= review.rating %> ></div>
-                  <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
-                  
-                <% if user_signed_in? %>
-                  <% if (review.user == current_user) || (current_user.admin?) %>
-                    <%= link_to "Edit", edit_listing_review_path(@listing, review) %>
-                    <%= link_to "Delete", listing_review_path(@listing, review), method: :delete %>
-                  <% end %>
-                <% end %>
+              <p>No reviews yet. Be the first to write one!</p>
+            <% else %>
+                <% @reviews.each do |review| %>              
+                    <td>
+                      <h4> <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %></h4>
+                      <p class = "small"><%= time_ago_in_words(review.created_at) %> ago </p>
+                    </td>
+
+                    <td>
+                      <div class="star-rating" data-score= <%= review.rating %> ></div>
+                      <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
+
+                     
+
+                      <!-- Check if user is signed in, to enable edit and update -->
+                      <% if user_signed_in? %>
+                      <% if (review.user == current_user) || (current_user.admin?) %>
+                      <%= link_to "Edit", edit_listing_review_path(@listing, review), class: "text-left"  %>
+                      <%= link_to "Delete", listing_review_path(@listing, review), method: :delete, class: "text-left"  %>     
+                      <% end %>
+                    <% end %>
 
                 </td>
               </tr>
@@ -68,10 +62,8 @@
           </tbody>
 
         </table>
-
   </div>
 </div>
-
 <% if user_signed_in? && current_user.admin? %>
 <%= link_to 'Edit', edit_listing_path(@listing), class: "btn btn-link" %> |
 <% end %>

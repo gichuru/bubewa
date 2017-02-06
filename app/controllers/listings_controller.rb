@@ -44,7 +44,7 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @reviews, notice: 'Listing was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Listing was successfully updated.' }
         format.json { render :show, status: :ok, location: @listing }
       else
         format.html { render :edit }
@@ -89,6 +89,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:image, :name, :description, :address, :phone, :email, :website)
+      params.require(:listing).permit(:image, :name, :description, :address, :phone, :email, :website, :title)
     end
 end

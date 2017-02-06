@@ -1,7 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-                        .center {
+.center {
   text-align: center;
 }
 
@@ -20,9 +20,13 @@
   }
 }
 
-.navbar-default .navbar-brand {
+.navbar-brand {
+    float: left;
+    padding: 3px 30px;
+    font-size: 18px;
+    line-height: 20px;
+    height: 50px;
 }
-
 
 .navbar-default {
     background-color: #fff;

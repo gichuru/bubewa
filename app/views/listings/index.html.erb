@@ -1,17 +1,18 @@
 <!--<p id="notice"><%= notice %></p>-->
-<h3>Listings</h3>
+<h4 >Todays Listing</h4>
 
-
-<div class="row">
+<div class="row, text-align: center">
   <% @listings.each do |listing| %>
     <div class="col-md-3">
             <div class="thumbnail">
               <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
               <div class="caption">
                 <strong><%= link_to listing.name, listing %></strong>
-                <p class = "small">Posted: <%= time_ago_in_words(listing.created_at) %> ago </p>
+                <p class = "small"><%= listing.title %>    <br>
+                  
+                  Posted: <%= time_ago_in_words(listing.created_at) %> ago </p>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
-                <%= listing.description %>       
+                    
 
                 <!-- Editing links --> 
                 <hr>  

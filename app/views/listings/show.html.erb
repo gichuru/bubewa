@@ -7,7 +7,14 @@
         <div class="star-rating" data-score= <%= @avg_rating  %> ></div>
           <p class="small">(<%= "#{@reviews.length} reviews" %>) Average score: <kbd><%= @avg_rating  %>/5 </kbd>  </p>
 
-          <address>
+        
+        <hr>
+          <p>
+            <strong>About:</strong>
+            <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
+          </p>
+          <hr>
+            <address>
             <strong>Address:</strong>
             <%= @listing.address %><br>
             <strong>Phone:</strong>
@@ -17,11 +24,6 @@
             <strong>Website:</strong>
             <%= link_to @listing.website, @listing %>
           </address>
-        <hr>
-          <p>
-            <strong>About:</strong>
-            <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
-          </p>
   </div>
   <div class="col-md-9">
     <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-info" %> <br><br>

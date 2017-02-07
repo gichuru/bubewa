@@ -74,7 +74,7 @@ class ReviewsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
-      @review = Review.find(params[:review_id])
+      @review = Review.find_by(params[:review_id])
     end
 
     #Check user

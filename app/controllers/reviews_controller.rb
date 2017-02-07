@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user! 
   before_action :set_listing
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_review, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :check_user, only: [:edit, :update, :destroy]
 
 
@@ -12,19 +12,6 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
-  end
-
-  #Added the def upvote and downvote
-  def upvote
-    @review = Review.find_by(params[:review_id])
-    @review.upvote_from current_user
-    redirect_to :back
-  end
-
-  def downvote
-    @review = Review.find(params[:review_id])
-    @review.downvote_from current_user
-    redirect_to :back
   end
 
 
@@ -71,10 +58,23 @@ class ReviewsController < ApplicationController
     end
   end
 
+  #Added the def upvote and downvote
+  def upvote
+    @review = Review.find(params[:review_id])
+    @review.upvote_from current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @review = Review.find(params[:review_id])
+    @review.downvote_from current_user
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
-      @review = Review.find(params[:id])
+      @review = Review.find(params[:review_id])
     end
 
     #Check user

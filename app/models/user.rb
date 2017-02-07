@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :reviews, dependent: :destroy
   validates :first_name, :last_name, presence: true
+  acts_as_voter
 end

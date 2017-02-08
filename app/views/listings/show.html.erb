@@ -67,7 +67,7 @@
                       <!-- Check if user is signed in, to enable edit and update -->
                       <% if user_signed_in? %>
                         <% if (review.user == current_user) || (current_user.admin?) %>
-                        <%= link_to "Edit", edit_listing_review_path(@listing, review), class: "text-left"  %>
+                        <!-- <%= link_to "Edit", edit_listing_review_path(@listing, review), class: "text-left"  %> -->
                         <%= link_to "Delete", listing_review_path(@listing, review), method: :delete, class: "text-left"  %>     
                       <% end %>
                     <% end %>

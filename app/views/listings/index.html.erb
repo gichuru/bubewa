@@ -9,9 +9,9 @@
               <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
               <div class="caption">
                 <strong><%= link_to listing.name, listing %></strong>
-                <p class = "small"><%= listing.title %></p>
-
-                <p class = "small">Posted <%= time_ago_in_words(listing.created_at) %> ago </p>
+                <p class = "small"><%= listing.title %><br> 
+                  Posted <%= time_ago_in_words(listing.created_at) %> ago 
+                </p>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
                 <% reviews = Review.where(listing_id: listing.id).order("created_at DESC") %>
                     <% if reviews.blank? %>

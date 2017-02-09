@@ -5,6 +5,50 @@
   text-align: center;
 }
 
+.heading-block {
+    position: relative;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway','Open Sans',Arial,Helvetica,sans-serif;
+    color: #1a1a1a;
+    text-transform: capitalize;
+    margin-top: 0em;
+    margin-bottom: 0.8em;
+    line-height: 1.2;
+}
+
+.color1 {
+    color: #1696e7;
+}
+
+.heading-block .sub-heading {
+    display: block;
+    text-align: center;
+    margin: 18px auto 18px auto;
+    color: #585858;
+    max-width: 750px;
+    line-height: 28px;
+    text-transform: none;
+    font-weight: 300;
+    padding: 16px 0px;
+    position: relative;
+}
+
+.heading-block .sub-heading .line {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    height: 6px;
+    width: 90%;
+    background-color: #f2f2f2;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
 .col-md-3:nth-child(4n+1) {
   clear: left;
 }

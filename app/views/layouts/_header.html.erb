@@ -23,17 +23,6 @@
         <!-- <li><%= link_to "FAQs", pages_faqs_path %></li>-->
       </ul>
 
-      <ul class="nav navbar-nav">
-
-         <% if user_signed_in? && current_user.admin? %> 
-           <li> user <%= User.count %> </li>
-           <li> reviews <%= Review.count %> </li>
-           <li> listing<%= Listing.count %> </li>
-            <% end %> 
-        
-        <!-- <li><%= link_to "FAQs", pages_faqs_path %></li>-->
-      </ul>
-
 
       <!--Right navigation: Lets ensure a user is an admin before we allow them to add a Listing -->
 

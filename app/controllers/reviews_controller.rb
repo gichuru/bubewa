@@ -14,6 +14,10 @@ class ReviewsController < ApplicationController
   def edit
   end
 
+  def user
+    @user = User.all
+    
+  end
 
   # POST /reviews
   # POST /reviews.json
@@ -24,6 +28,12 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
         if @review.save
+
+          #create notifications to users
+            @listing.users.each do |user|
+              Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @review)
+              end
+
           format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
           format.json { render :show, status: :created, location: @review }
         else
@@ -74,7 +84,7 @@ class ReviewsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_review
-      @review = Review.find(params[:review_id])
+      @review = Review.find_by(params[:review_id])
     end
 
     #Check user

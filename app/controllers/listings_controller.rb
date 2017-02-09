@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all 
+    @listings = Listing.all
   end
 
   # GET /listings/1

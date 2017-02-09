@@ -83,8 +83,9 @@ class ReviewsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_review
-      @review = Review.find_by(id: params[:id])
+      @review = Review.find_by(params[:id])
     end
 
     #Check user
@@ -104,7 +105,7 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:rating, :comment)
+      params.require(:review).permit(:rating, :comment, :upvote, :downvote)
     end
    
 end

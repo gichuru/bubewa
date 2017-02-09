@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user! 
   before_action :set_listing
-  before_action :set_review, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
 
 

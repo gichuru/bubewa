@@ -24,6 +24,52 @@ h1, h2, h3, h4, h5, h6 {
     color: #1696e7;
 }
 
+
+.badge {
+    font-family: Roboto Condensed;
+    display: inline-block;
+    min-width: 10px;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #f05050;
+    border-radius: 10px;
+}
+
+.glyphicon{
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: red;
+}
+
+
+.dropdown>a>.label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 5px;
+}
+
+.dropdown>a>.label {
+    top: 10px;
+}
+
+
+
 .heading-block .sub-heading {
     display: block;
     text-align: center;

@@ -30,9 +30,9 @@ class ReviewsController < ApplicationController
         if @review.save
 
           #create notifications to users
-            @listing.users.each do |user|
-              Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @review)
-              end
+           # @listing.users.each do |user|
+            #  Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @review)
+             # end
 
           format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
           format.json { render :show, status: :created, location: @review }

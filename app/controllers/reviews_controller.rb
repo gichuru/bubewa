@@ -35,8 +35,7 @@ def send_notifications(type)
 
     respond_to do |format|
         if @review.save
-          
-          send_notifications("posted a new review on a topic you're following, show them some love")
+          send_notifications("posted a new review on a topic you're following, show them some love!")
           format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
           format.json { render :show, status: :created, location: @review }
         else

@@ -29,7 +29,7 @@ class Notifications
 
   handleSuccess: (data) =>
     items = $.map data, (notification) ->
-      '<li> Someone ' + notification.action + ' a review </li>'
+      '<li> <a href="'+ notification.url + '">'+ notification.actor.first_name + notification.action + '</a> </li>'
     unread_count = items.length
     # unread_count = 0
     # $.each data, (i, notification) ->
@@ -41,3 +41,5 @@ class Notifications
 
 jQuery ->
   new Notifications
+
+  

@@ -3,10 +3,10 @@ class NotificationsController < ApplicationController
 
   def index
   	@notifications = Notification.where(recipient: current_user)
-  	respond_to do |format|
-  		format.json { render json: @notifications }
-  		format.html { render index: @notifications }
-  	end
+  	#respond_to do |format|
+  		#format.json { render json: @notifications }
+  		#format.html { render index: @notifications }
+  	#end
     
   end
 

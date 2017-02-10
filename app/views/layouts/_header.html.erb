@@ -34,16 +34,18 @@
         
         <% if user_signed_in? %>
 
-        <li class="nav-item btn-group" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+        <li class="nav-item btn-group" data-behavior="notifications">
           <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            <span class ="glyphicon glyphicon-bell"></span>
            
-           <span data-behavior="unread-count">
+           <span data-behavior="unread-count" class="badge">
            </span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
-            <ul></ul>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu" data-behavior="notification-items">
+
+            <ul><span class ="glyphicon glyphicon-heart"></span> You have no Nofications at the moment! post a review! </ul>
           </div>
+        </li>
         
       <li class="dropdown">
          

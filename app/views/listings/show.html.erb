@@ -42,37 +42,52 @@
                 <% @reviews.each do |review| %> 
 
                     <td>
-                      <h4> <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %></h4>
-                      <p class = "small"><%= time_ago_in_words(review.created_at) %> ago. <br> 
+                      <Strong> <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %></Strong><br>
 
-                    </td>
+                      <I class="small">Was here <%= time_ago_in_words"#{review.user.last_sign_in_at}" %> ago.</i>
+
+                        <!-- Number of reviews -->
+                        
+                        
+                  </td>
                     <td>
-                      <div class="star-rating" data-score= <%= review.rating %> ></div>
+                      <div class="row">
+                          <div class="col-md-4">
+                            <div class="star-rating" data-score= <%= review.rating %> ></div></div>
+                          <div class="col-md-4"></div>
+
+                          <div class="col-md-4 text-right"><i class = "small ">Reviewed <%= time_ago_in_words(review.created_at) %> ago</i>
+                      </p></div>
+                        </div>
+
+
+                     
                       <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
                       <!--votable -->
-                      <p class="navbar-right small">
-                        <%= link_to listing_review_upvote_path(@listing.id, review.id), method: :put do %>
-                        <span class ="glyphicon glyphicon-thumbs-up"></span> <%= review.get_upvotes.size %>
-                        <% end %>  | 
+                     
+
+                        <div class="row">
                          
-                        <!--votable -->
-                        <%= link_to listing_review_downvote_path(@listing.id, review.id), method: :put do %> 
-                        <span class ="glyphicon glyphicon-flag"></span>  <%= review.get_downvotes.size %>
+                      <div class="col-md-4 small "> 
+                        <%= link_to listing_review_upvote_path(@listing.id, review.id), method: :put do %>
+                          <span class ="glyphicon glyphicon-thumbs-up"></span> <%= review.get_upvotes.size %>
                         <% end %> 
-                        
-                        </p>
-                      
-
-                        <!--votable -->
-                      <!-- Check if user is signed in, to enable edit and update -->
-                      <% if user_signed_in? %>
+                        <%= link_to listing_review_downvote_path(@listing.id, review.id), method: :put do %> 
+                          <span class ="glyphicon glyphicon-flag"></span>  <%= review.get_downvotes.size %> 
+                        <% end %> 
+                      </div>
+                       <div class="col-md-4"></div>
+                      <div class="col-md-4 text-right">
+                        <% if user_signed_in? %>
                         <% if (review.user == current_user) || (current_user.admin?) %>
-                         <%= link_to "Edit", edit_listing_review_path(@listing, review), class: "text-left"  %> 
-                        <%= link_to "Delete", listing_review_path(@listing, review), method: :delete, class: "text-left"  %>     
+                         <%= link_to "Update", edit_listing_review_path(@listing, review), class: "text-left"  %> | 
+                          <%= link_to "", listing_review_path(@listing, review), method: :delete, class: "glyphicon glyphicon-trash"  %> 
+                        <% end %>
                       <% end %>
-                    <% end %>
-
-                      </td>
+                    </div>
+                  </div>
+                      
+                </td>
               </tr>
             <% end %>
             <% end %>

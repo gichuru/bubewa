@@ -19,6 +19,13 @@ class ReviewsController < ApplicationController
     
   end
 
+  def send_notifications
+    review_obj = @review
+    (@review.listing.reviews.uniq - [review_obj]).each do |rev|
+      Notification.create(recipient: rev.user, actor: current_user, action: "posted", notifiable: @review)
+    end
+  end
+
   # POST /reviews
   # POST /reviews.json
   def create
@@ -28,12 +35,10 @@ class ReviewsController < ApplicationController
 
     respond_to do |format|
         if @review.save
-
+          # review = @review
           #create notifications to users
-           # @listing.users.each do |user|
-            #  Notification.create(recipient: user, actor: current_user, action: "posted", notifiable: @review)
-             # end
-
+          
+          send_notifications
           format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
           format.json { render :show, status: :created, location: @review }
         else
@@ -72,12 +77,14 @@ class ReviewsController < ApplicationController
   def upvote
     @review = Review.find(params[:review_id])
     @review.upvote_from current_user
+    send_notifications
     redirect_to :back
   end
 
   def downvote
     @review = Review.find(params[:review_id])
     @review.downvote_from current_user
+    send_notifications
     redirect_to :back
   end
 

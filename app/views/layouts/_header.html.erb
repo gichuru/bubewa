@@ -34,13 +34,21 @@
         
         <% if user_signed_in? %>
 
+        <li class="dropdown">
+        
+  
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-bell"><strong class="badge"></strong> </span> </a>
+              
+        </li>
+
 
       <li class="dropdown">
         
   
 
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <span class="glyphicon glyphicon-bell"><strong class="badge">5</strong> </span>
               
                 <%= current_user.first_name %> <%= current_user.last_name %> <b class="caret"></b></a>
           <ul class="dropdown-menu">

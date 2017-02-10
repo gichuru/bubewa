@@ -1,0 +1,79 @@
+ <nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     
+       <%= link_to image_tag("https://s3.eu-west-2.amazonaws.com/bebuwaphotos/logo.jpg", alt: "Bubewa"), '/', class: "navbar-brand" %>
+    </div>
+
+    <!-- Here are our static pages  -->
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "About", pages_about_path %></li>
+        <li><%= link_to "How it Works", pages_how_path %></li>        
+        <!-- <li><%= link_to "FAQs", pages_faqs_path %></li>-->
+      </ul>
+      
+
+
+      <!--Right navigation: Lets ensure a user is an admin before we allow them to add a Listing -->
+
+      <ul class="nav navbar-nav navbar-right">
+         <% if user_signed_in? && current_user.admin? %> 
+            <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
+            <li><%= link_to "Dashboard", rails_admin_path %></li>
+            <% end %> 
+        
+        <% if user_signed_in? %>
+
+<<<<<<< HEAD
+        <li class="nav-item btn-group" data-behavior="notifications" data-notifications='<%= render template: "notifications/index", formats: [:json] %>'>
+          <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <span class ="glyphicon glyphicon-bell"></span><span data-behavior="unread-count"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+          </div>
+=======
+        <li class="dropdown">
+        
+  
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="glyphicon glyphicon-bell"><strong class="badge"></strong> </span> </a>
+              
+        </li>
+
+
+      <li class="dropdown">
+>>>>>>> 633ed16cdcc40dadae73ff6a58c1d938f4755baa
+        
+      <li class="dropdown">
+         
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+<<<<<<< HEAD
+=======
+              
+>>>>>>> 633ed16cdcc40dadae73ff6a58c1d938f4755baa
+                <%= current_user.first_name %> <%= current_user.last_name %> <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+            <% else %>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+            <%  end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

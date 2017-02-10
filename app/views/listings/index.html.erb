@@ -16,10 +16,7 @@
 
     <b class="color1">"Caveat emptor"</b> is a Latin term that means <b class="color1">"let the buyer beware."</b> Similar to the phrase <b class="color1">"sold as is,"</b> this term means that the buyer assumes the risk that a product may fail to meet expectations or have defects. <br>
     - We help each other avoid <i>drama</i> na kizungu mingi - 
-
   </p>
-
-
   <hr>
 </div>
 
@@ -37,11 +34,11 @@
                 </p>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
                 <% reviews = Review.where(listing_id: listing.id).order("created_at DESC") %>
-                    <% if reviews.blank? %>
+                  <% if reviews.blank? %>
                     <% avg_rating = 0 %>
-                    <% else %>
+                  <% else %>
                     <% avg_rating = reviews.average(:rating).round(2) %>
-                    <% end %>
+                  <% end %>
 
                     <div class="star-rating" data-score= <%= avg_rating %> ></div>
                     <strong>Average score: </strong> <kbd><%= avg_rating  %>/5 </kbd> <br>

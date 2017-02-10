@@ -19,8 +19,6 @@ class ListingsController < ApplicationController
     @listing = Listing.new
   end
 
-
-
   # GET /listings/1/edit
   def edit
   end
@@ -32,11 +30,6 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
       if @listing.save
-
-#send notifications to all users when a new listing has been posted.
-        #User.all.uniq.each do |user|
-         # send_notifications (recipient: user, actor: current_user, notifiable: @listing)
-        #end
 
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render :show, status: :created, location: @listing }

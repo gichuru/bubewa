@@ -2,7 +2,12 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = Notification.where(recipient: current_user).last
+  	@notifications = Notification.where(recipient: current_user)
+  	respond_to do |format|
+  		format.json { render json: @notifications }
+  		format.html { render index: @notifications }
+  	end
+    
   end
 
   def mark_as_read

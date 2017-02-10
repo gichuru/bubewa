@@ -1,10 +1,13 @@
-json.array! @notification do |notification|
+json.array! @notifications do |notification|
   json.id notification.id
+  json.unread !notification.read_at?
+  #json.template render partial: "notifications/#{notification.notifiable_type.underscore.pluralize}/#{notification.action}", locals: {notification: notification}, formats: [:html]
+
   #json.recipient notification.recipient
-  json.actor notification.actor.f_name
-  json.action notification.action
-  json.notifiable do #notification.notifiable
-    json.type "a {notification.notifiable.class.to_s.underscore.humanize.downcase}"
-  end
-  json.url listing_review_path(notification.notifiable.listing_review, anchor: dom_id(notification.notifiable))
+  #json.actor notification.actor.username
+  #json.action notification.action
+  #json.notifiable do #notification.notifiable
+    #json.type "a #{notification.notifiable.class.to_s.underscore.humanize.downcase}"
+  #end
+  #json.url forum_thread_path(notification.notifiable.forum_thread, anchor: dom_id(notification.notifiable))
 end

@@ -29,13 +29,13 @@ class Notifications
 
   handleSuccess: (data) =>
     items = $.map data, (notification) ->
-      notification.template
-
-    unread_count = 0
-    $.each data, (i, notification) ->
-      if notification.unread
-        unread_count += 1
-
+      '<li> Someone ' + notification.action + ' a review </li>'
+    unread_count = items.length
+    # unread_count = 0
+    # $.each data, (i, notification) ->
+    #   if notification.unread
+    #     unread_count += 1
+    # console.log items.length
     $("[data-behavior='unread-count']").text(unread_count)
     $("[data-behavior='notification-items']").html(items)
 

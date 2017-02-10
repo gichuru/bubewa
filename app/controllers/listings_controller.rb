@@ -63,6 +63,7 @@ class ListingsController < ApplicationController
       else
         @avg_rating = @reviews.average(:rating).round(2)
       end
+      @notifications = Notification.all
     end
 
 

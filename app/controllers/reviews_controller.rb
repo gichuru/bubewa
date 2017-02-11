@@ -74,14 +74,14 @@ def send_notifications(type)
   def upvote
     @review = Review.find(params[:review_id])
     @review.upvote_from current_user
-    send_notifications("LIKED! Says, your review was AWESOME, you should REVIEW MORE products!")
+    send_notifications("LIKED your Review! Says, your review was AWESOME, you should REVIEW MORE products!")
     redirect_to :back
   end
 
   def downvote
     @review = Review.find(params[:review_id])
     @review.downvote_from current_user
-    send_notifications("FLAG! Says, please UPDATE and provide more information on your review")
+    send_notifications("is REQUESTING more! please UPDATE and provide more information on your review")
     redirect_to :back
   end
 

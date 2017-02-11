@@ -35,7 +35,7 @@ def send_notifications(type)
 
     respond_to do |format|
         if @review.save
-          send_notifications("posted a new review on a topic you're following, show them some love!")
+          send_notifications("Posted a NEW Item and has invited YOU to REVIEW IT.")
           format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
           format.json { render :show, status: :created, location: @review }
         else
@@ -74,14 +74,14 @@ def send_notifications(type)
   def upvote
     @review = Review.find(params[:review_id])
     @review.upvote_from current_user
-    send_notifications("found your review very helpful and says thank you, Post more reviews!")
+    send_notifications("LIKED! Says, your review was AWESOME, you should REVIEW MORE products!")
     redirect_to :back
   end
 
   def downvote
     @review = Review.find(params[:review_id])
     @review.downvote_from current_user
-    send_notifications("needs more information on the review you posted")
+    send_notifications("FLAG! Says, please UPDATE and provide more information on your review")
     redirect_to :back
   end
 

@@ -1,13 +1,11 @@
 
 <div class="row">
   <div class="col-md-3">
-    <%= image_tag @listing.image_url (:medium) %>
-      <h3><%= @listing.name %></h3>
+    <%= image_tag @listing.image_url (:medium) %><br>
+      <h4><%= @listing.name %></h4>
       <p class="small"> <%= @listing.title %></p>
-        <div class="star-rating" data-score= <%= @avg_rating  %> ></div>
-          <p class="small">(<%= "#{@reviews.length} reviews" %>) Average score: <kbd><%= @avg_rating  %>/5 </kbd>  </p>
-
-        
+        <div class="star-rating" data-score= <%= @avg_rating  %> ></div> 
+          <p class="small text-left "> (<%= "#{@reviews.length} reviews" %>) Average rating: <kbd><%= @avg_rating  %> /5</kbd></p>
         <hr>
           <p>
             <strong>About:</strong>

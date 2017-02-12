@@ -29,6 +29,7 @@
       <ul class="nav navbar-nav navbar-right">
          <% if user_signed_in? && current_user.admin? %> 
             <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
+            <li> <%= link_to 'Pending Requests', requests_path %> </li>
             <li><%= link_to "Dashboard", rails_admin_path %></li>
             <% end %> 
         

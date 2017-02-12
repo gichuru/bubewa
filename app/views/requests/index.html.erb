@@ -1,0 +1,36 @@
+<h4>Current Requests : Total <%= Request.count %></h4>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      
+      <th>Name</th>
+      <th>Website</th>
+      <th>Reason</th>
+      <th>Requested by</th>
+      <th>Time Stamp</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        
+        <td><%= request.name %></td>
+        <td><%= request.website %></td>
+        <td><%= request.reason %></td>
+        <td><%= "#{request.user.first_name.capitalize} #{request.user.last_name.capitalize[0]}." %></td>
+        <td><%= time_ago_in_words(request.created_at) %> ago</td>
+
+        <% if user_signed_in? && current_user.admin? %>
+        <td><%= link_to 'Show', request %></td>
+        <td><%= link_to 'Edit', edit_request_path(request) %></td>       
+        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

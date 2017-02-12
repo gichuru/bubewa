@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209123917) do
+ActiveRecord::Schema.define(version: 20170212174638) do
 
   create_table "listings", force: :cascade do |t|
     t.string   "name"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20170209123917) do
     t.string   "notifiable_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.string   "name"
+    t.string   "website"
+    t.string   "reason"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   create_table "reviews", force: :cascade do |t|

@@ -2,23 +2,48 @@
 
 
 
-<div class="col-md-7 col-md-offset-3 text-align: center">
+<div class="col-md-12 text-align: center">
   <div class"heading-block">
     <h2 class="heading">Bubewa:  
     <span class="color1">Ratings </span> and
     <span class="color1">Reviews</span>
     Platform
     </h2>
+      <p class ="small"> Saves you money and headaches by working as a community</p>
   </div>
   <hr>
 
   <p class ="sub-heading"> 
 
-    <b class="color1">"Caveat emptor"</b> is a Latin term that means <b class="color1">"let the buyer beware."</b> Similar to the phrase <b class="color1">"sold as is,"</b> this term means that the buyer assumes the risk that a product may fail to meet expectations or have defects. <br>
+    <!--<b class="color1">"Caveat emptor"</b> is a Latin term that means <b class="color1">"let the buyer beware."</b> Similar to the phrase <b class="color1">"sold as is,"</b> this term means that the buyer assumes the risk that a product may fail to meet expectations or have defects. <br>
     - We help each other avoid <i>drama</i> na kizungu mingi - 
-  </p>
-  <hr>
+  </p> -->
+  
+  <div class="col-md-12 text-align: center">
+  <div class="col-md-4">
+    <h4>Step 1: Earn User Points</h4>
+   <p class ="small"> You start by reviewing products to earn user points (Minimum 5 reviews). User points enable you to post a product or service to be reviewed by the community. <br>Start with the latest item below</p>
+    
+  </div>
+
+  <div class="col-md-4">
+     <h4>Step 2: Request Reviews </h4>
+
+    <p class ="small"> You get a sharable link to your item, share it with your friends on facebook and whatsApp groups and watch the reviews stream in. Remember the best reviews are from your own friends</p></div>
+
+<div class="col-md-4">
+   <h4>Step 3: Decide!</h4>
+
+  <p class ="small"> Now you can confidently make a decision if to spend your money or not on your purchase. Upvote useful reviews and flag those that need more information to earn more points. </p></div> <br><br>
 </div>
+
+<p><%= link_to 'Click to Request Reviews on an Item', new_listing_path, class: "btn btn-info" %></p>
+<p class ="small">Have enough points and you cant request a review? <i> <%= link_to 'click here', new_request_path, class: "btn-link" %></i></p>
+ <hr>
+</div>
+
+
+
 
 
 <div class="row, text-align: center">
@@ -32,8 +57,8 @@
                 <p class = "small"><%= listing.title %><br> 
                   Posted <%= time_ago_in_words(listing.created_at) %> ago 
                 </p>
-                <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning etc-->
-                <% reviews = Review.where(listing_id: listing.id).order("created_at DESC") %>
+                <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
+                <% reviews = Review.where(listing_id: listing.id) %>
                   <% if reviews.blank? %>
                     <% avg_rating = 0 %>
                   <% else %>

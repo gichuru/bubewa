@@ -85,7 +85,7 @@ class ListingsController < ApplicationController
 
     def check_user
     unless current_user.admin?
-        redirect_to root_url, alert: "Sorry, only admins can do that!"
+        redirect_to root_url, alert: "Sorry! You will need to have reviewed atleast 5 items to get enough points to request for reviews, Put in some effort!", class: "btn btn-danger"
     end
     end
 

@@ -12,14 +12,21 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway','Open Sans',Arial,Helvetica,sans-serif;
+    
     color: #1a1a1a;
     text-transform: capitalize;
-    margin-top: 0em;
-    margin-bottom: 0.8em;
+    margin-top: 0.8em;
+    margin-bottom: 0.2em;
     line-height: 1.2;
 }
 
+.avgscore {
+font-size: 50px;
+font-weight: bold;
+line-height: 1.2;
+color: #1ad;
+text-shadow: 0 1px 3px rgba(255,255,255,0.5);
+}
 
 .dropdown-menu {
 position: absolute;

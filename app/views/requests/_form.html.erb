@@ -1,0 +1,49 @@
+<%= form_for(request, :html => { multipart: true }) do |f| %>
+  <% if request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control", 
+    placeholder: "Enter the name of the product or service, department or public official you want reviewed, i.e Huduma Center Nakuru " 
+    %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :website %>
+    <%= f.text_field :website, class: "form-control", placeholder: "Type or paste entire web address include http:// or https://, example: http://www.bubewa.com" %>
+  </div>
+
+<div class="form-group">
+    <%= f.label :reason %>
+    <%= f.text_area :reason, size: 20, class: "form-control", 
+    placeholder: 
+    "Give the community a reason why they should help you review this
+
+    Example:
+
+    We would like to know what people think about our products and services
+    I love this product and want to know what other people think 
+    I bought this product and I'm dissapointed
+    I want to purchase this products or services and I am not sure
+    I want to know what to expect when I enagage this person or institution
+    We should review this for public good.
+
+    ", rows: 4
+    %>
+  </div>
+
+
+   <div class="actions">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

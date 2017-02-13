@@ -1,0 +1,18 @@
+<p>
+  <strong>Name:</strong>
+  <%= @request.name %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @request.website %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @request.reason %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> 
+<%= link_to 'Back', root_url %>
+

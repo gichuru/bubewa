@@ -21,12 +21,26 @@
         <li><%= link_to "How it Works", pages_how_path %></li>        
         <!-- <li><%= link_to "FAQs", pages_faqs_path %></li>-->
       </ul>
-      
+
+  
 
 
       <!--Right navigation: Lets ensure a user is an admin before we allow them to add a Listing -->
 
       <ul class="nav navbar-nav navbar-right">
+
+ <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">NEW! Browse by Categories <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% Category.all.each do |category| %>
+              <li><%= link_to category.name, listings_path(category: category.name)  %></li>
+              <li role="separator" class="divider"></li>
+              <%end%>     
+            </ul>
+          </li>
+
+
+
          <% if user_signed_in? && current_user.admin? %> 
             <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
             <li> <%= link_to 'Pending Requests =>', requests_path %> </li> 
@@ -59,6 +73,7 @@
               <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
             </ul>
           </li>
+
           <% else %>
          <li><%= link_to "Sign Up", new_user_registration_path %></li>
           <li><%= link_to "Sign In", new_user_session_path %></li> 

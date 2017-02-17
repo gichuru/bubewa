@@ -4,4 +4,5 @@ class Listing < ApplicationRecord
     validates :name, :address, :phone, :email, :website, :image, presence: true
     #Listing.order("name_by ASC")
     has_many :users, through: :review
+    belongs_to :category
 end

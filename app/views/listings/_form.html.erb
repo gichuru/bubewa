@@ -16,6 +16,11 @@
     <%= f.text_field :name, class: "form-control", placeholder: "enter name, i.e Agha Khan Hospital, " %>
   </div>
 
+    <div class="form-group">
+    <%= f.label :category_id %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a Category"}, {class: "btn btn-default dropdown-toggle"} %>
+  </div>
+
   <div class="form-group">
     <%= f.label :title %>
     <%= f.text_field :title, class: "form-control", placeholder: "could be the job title or middle class hotel etc " %>

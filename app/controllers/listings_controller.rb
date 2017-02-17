@@ -6,7 +6,12 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
+    if params[:category].blank?
     @listings = Listing.all
+  else
+    @category_id = Category.find_by(name: params[:category]).id
+    @listings = Listing.where(category_id: @category_id).order("created_at DESC")
+  end
   end
 
 
@@ -91,6 +96,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:image, :name, :description, :address, :phone, :email, :website, :title)
+      params.require(:listing).permit(:image, :name, :description, :address, :phone, :email, :website, :title, :category_id)
     end
 end

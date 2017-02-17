@@ -8,7 +8,7 @@ class Notifications
 
       setInterval (=>
         @getNewNotifications()
-      ), 5000
+      ), 20000
 
   getNewNotifications: ->
     $.ajax(
@@ -30,7 +30,6 @@ class Notifications
   handleSuccess: (data) =>
     items = $.map data, (notification) ->
       '<li> <a href="'+ notification.url + '">'+ notification.actor.first_name + notification.action + '</a> </li>'
-      '<li role="separator" class="divider"></li>'
     unread_count = items.length
     # unread_count = 0
     # $.each data, (i, notification) ->

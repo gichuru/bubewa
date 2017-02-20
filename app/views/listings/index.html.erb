@@ -21,7 +21,7 @@
   <div class="col-md-12 text-align: center">
   
  <% if user_signed_in? %>
- <h4>Looking forward to your reviews today!  <%= current_user.first_name %> </h4> 
+ <p>Hey <%= current_user.first_name %>, we are looking forward to your reviews today.. 1 review a day keeps bad service a way </p> 
 
  <% else %>
   
@@ -62,7 +62,7 @@
               <div class="caption">
                 <strong><%= link_to listing.name, listing %></strong>
                 <p class = "small"><%= listing.title %><br> 
-                  Posted <%= time_ago_in_words(listing.created_at) %> ago 
+                  Requested <%= time_ago_in_words(listing.created_at) %> ago 
                 </p>
                 <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
                 <% reviews = Review.where(listing_id: listing.id) %>

@@ -20,14 +20,14 @@
             <strong>Email:</strong>
             <%= mail_to @listing.email %> <br>
             <strong>Website:</strong>
-            <%= link_to @listing.website, @listing %>
+            <%= link_to @listing.website, @listing, target: :_blank %>
           </address>
   </div>
   <div class="col-md-9">
     <div class="col-md-11">
     <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-info" %> <br><br>
             </div>
-        <div class="col-md-1 text-right">Sambaza <%= social_share_button_tag("Bubewa Ratings and Review", :url =>"www.bubewa.com/listings?category=4") %>
+        <div class="col-md-1 text-right">Sambaza <%= social_share_button_tag("Bubewa Ratings and Review", :url =>"http://www.bubewa.com/") %>
 
         </div> <br>
 

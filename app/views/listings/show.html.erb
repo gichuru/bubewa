@@ -3,105 +3,98 @@
   <div class="col-md-3">
     <%= image_tag @listing.image_url (:medium) %><br>
       <h4><%= @listing.name %></h4>
-      <p class="small"> <%= @listing.title %></p>
-        <div class="star-rating" data-score= <%= @avg_rating  %> ></div> 
-          <p class="small text-left "> (<%= "#{@reviews.length} reviews" %>) Average rating: <kbd><%= @avg_rating  %> /5</kbd></p>
-        <hr>
-          <p>
-            <strong>About:</strong>
-            <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
+      <p class="small"> <%= @listing.title %>
+        </p>
+          <div class="star-rating" data-score= <%= @avg_rating  %> >
+          </div> 
+          <p class="small text-left "> (<%= "#{@reviews.length} reviews" %>) Average rating: <kbd><%= @avg_rating  %> /5</kbd>
           </p>
+          <i><%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings") %> Share to get reviews from your friends</i> 
+          <hr>
+              <p>         
+                <strong>About:</strong>
+                <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
+              </p>
           <hr>
             <address>
-            <strong>Address:</strong>
-            <%= @listing.address %><br>
-            <strong>Phone:</strong>
-            <%= @listing.phone %><br>
-            <strong>Email:</strong>
-            <%= mail_to @listing.email %> <br>
-            <strong>Website:</strong>
-            <%= link_to @listing.website, @listing, target: :_blank %>
-          </address>
+              <strong>Address:</strong>
+              <%= @listing.address %><br>
+              <strong>Phone:</strong>
+              <%= @listing.phone %><br>
+              <strong>Email:</strong>
+              <%= mail_to @listing.email %> <br>
+              <strong>Website:</strong>
+              <%= link_to @listing.website, @listing, target: :_blank %>
+            </address>
   </div>
+
   <div class="col-md-9">
-    <div class="col-md-11">
-    <%= link_to "Haiya, Post a Review ", new_listing_review_path(@listing), class: "btn btn-info" %> <br><br>
-            </div>
-        <div class="col-md-1 text-right">Sambaza <%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings") %>
-
-        </div> <br>
-
-
-
-<div class="col-md-9">
+      <div class="col-md-11">
+      <%= link_to "Add your Review ", new_listing_review_path(@listing), class: "btn btn-info" %>
+      </div>
       <table class="table">
-
-
         <thead>
             <tr>
               <th class="col-md-3"></th>
               <th class="col-md-9"></th>
+
             </tr>
           </thead>           
           <tbody>
-             <% if @reviews.blank? %>
-                  <tr>
-                    <p>No reviews yet. Be the first to write one!</p>
+            
+              <% if @reviews.blank? %>
+               <td>
+                    <p>Be the first to post a review!</p>
+                    </td>
             <% else %>
+            <tr>
+            
                 <% @reviews.each do |review| %> 
-</div> 
                     <td>
-                      <Strong> <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %></Strong><br>
-
+                      <Strong> <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
+                      </Strong>
+                      <br>
                      <i class = "small ">Posted <%= time_ago_in_words(review.created_at) %> ago</i>
-                      </p>
-
-                        <!-- Number of reviews -->
-                        
-                        
-                  </td>
-                    <td>
+                        <!-- Number of reviews -->    
+                    </td>
+                <td>
                       <div class="row">
                           <div class="col-md-4">
-                            <div class="star-rating" data-score= <%= review.rating %> ></div></div>
-                          <div class="col-md-4"></div>
-
-                          <div class="col-md-4 text-right"></div>
-                        </div>
-
-
-                     
-                      <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></p>
-                      <!--votable -->
-                     
-
-                        <div class="row">
-                         
+                            <div class="star-rating" data-score= <%= review.rating %> >
+                            </div>
+                          </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 text-right"></div>
+                      </div>
+                      <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %>
+                      </p>
+                  <div class="row">
                       <div class="col-md-4 small "> 
-                        <%= link_to listing_review_upvote_path(@listing.id, review.id), method: :put do %>
-                          <span class ="glyphicon glyphicon-thumbs-up"></span> <%= review.get_upvotes.size %>
-                        <% end %> 
-                        <%= link_to listing_review_downvote_path(@listing.id, review.id), method: :put do %> 
-                          <span class ="glyphicon glyphicon-flag"></span>  <%= review.get_downvotes.size %> 
+                          <%= link_to listing_review_upvote_path(@listing.id, review.id), method: :put do %>
+                          <span class ="glyphicon glyphicon-thumbs-up">
+                          </span> <%= review.get_upvotes.size %>
+                          <% end %> 
+                          <%= link_to listing_review_downvote_path(@listing.id, review.id), method: :put do %> 
+                          <span class ="glyphicon glyphicon-flag">
+                          </span>  <%= review.get_downvotes.size %> 
                         <% end %> 
                       </div>
-                       <div class="col-md-4"></div>
+
+                      <div class="col-md-4"></div>
                       <div class="col-md-4 text-right">
-                        <% if user_signed_in? %>
-                        <% if (review.user == current_user) || (current_user.admin?) %>
-                         <%= link_to "Update", edit_listing_review_path(@listing, review), class: "text-left"  %> | 
+                          <% if user_signed_in? %>
+                          <% if (review.user == current_user) || (current_user.admin?) %>
+                          <%= link_to "Update", edit_listing_review_path(@listing, review), class: "text-left"  %> | 
                           <%= link_to "", listing_review_path(@listing, review), method: :delete, class: "glyphicon glyphicon-trash"  %> 
                         <% end %>
                       <% end %>
-                    </div>
-                  </div>
-                      
+                      </div>
+                  </div>                      
                 </td>
               </tr>
-            <% end %>
+              <% end %>
             <% end %>
           </tbody>
-
         </table>
   </div>
 </div>

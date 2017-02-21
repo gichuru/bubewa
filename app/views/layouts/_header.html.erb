@@ -58,6 +58,7 @@
 
             <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
             <li><%= link_to "Dashboard", rails_admin_path %></li>
+             <li> <%= link_to 'Pending Requests', requests_path %></li> 
             <li> <%= link_to Request.count %> </li>
             <% end %> 
         
@@ -81,7 +82,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <%= current_user.first_name %> <%= current_user.last_name %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li> <%= link_to 'Pending Requests', requests_path %></li> 
+             
               <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
               <li role="separator" class="divider"></li>
               <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>

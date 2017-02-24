@@ -9,7 +9,27 @@
           </div> 
           <p class="small text-left "> (<%= "#{@reviews.length} reviews" %>) Average rating: <kbd><%= @avg_rating  %> /5</kbd>
           </p>
+
+            <p> <% if @avg_rating < 1.0 %>
+              <span class="label label-default">Avoid until item is rated</span>
+              <% elsif @avg_rating  <= 1.5 %>
+             <span class="label label-danger">Risky and Dangerous</span>
+                 <% elsif @avg_rating  <= 2 %>
+                 <span class="label label-warning">Warning</span>
+                  <% elsif @avg_rating <= 3 %>
+                  <span class="label label-info">Ok. Average</span>
+                  <% elsif @avg_rating <= 4 %>
+                  <span class="label label-primary">Trustworthy</span>
+                  <% else @avg_rating > 4  %>
+                  <span class="label label-success">Excellent</span>
+              <% end %></p>
+
+
           <i><%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings") %> Share to get reviews from your friends</i> 
+
+           
+
+
           <hr>
               <p>         
                 <strong>About:</strong>

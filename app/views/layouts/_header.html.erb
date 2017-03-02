@@ -8,90 +8,58 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      
       <%= link_to image_tag("https://s3.eu-west-2.amazonaws.com/bebuwaphotos/logo.jpg", alt: "Bubewa"), '/', class: "navbar-brand" %>
     </div>
 
     <!-- Here are our static pages  -->
-
-
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "About", pages_about_path %></li>
-         <li><%= link_to " ", new_user_session_path %></li> 
-        <li><%= link_to "How it Works", pages_how_path %></li> 
-        
+        <li><%= link_to "How it Works", pages_how_path %></li>   
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">NEW! Browse by Categories <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse by Categories <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <% Category.all.each do |category| %>
               <li><%= link_to category.name, listings_path(category: category.id)  %></li>
               <li role="separator" class="divider"></li>
               <%end%>     
             </ul>
+              <li><%= link_to " ", new_user_session_path %></li> 
           </li>
-          <li><%= link_to 'Post an item for review', new_request_path %></li>
-       
-        <!-- <li><%= link_to "FAQs", pages_faqs_path %></li>-->
       </ul>
 
-  
-
-
       <!--Right navigation: Lets ensure a user is an admin before we allow them to add a Listing -->
-
       <ul class="nav navbar-nav navbar-right">
-
- <!--<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">NEW! Browse by Categories <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <% Category.all.each do |category| %>
-              <li><%= link_to category.name, listings_path(category: category.id)  %></li>
-              <li role="separator" class="divider"></li>
-              <%end%>     
-            </ul>
-          </li>-->
-
-
-
-         <% if user_signed_in? && current_user.admin? %> 
-
-            <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
-            <li><%= link_to "Dashboard", rails_admin_path %></li>
-             <li> <%= link_to 'Pending Requests', requests_path %></li> 
-            <li> <%= link_to Request.count %> </li>
-            <% end %> 
-        
+        <li><%= link_to 'Post an item for review', new_request_path %></li>
         <% if user_signed_in? %>
-
         <li class="nav-item btn-group" data-behavior="notifications">
           <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class ="glyphicon glyphicon-bell"></span>
-            
             <span data-behavior="unread-count" class="badge">
             </span>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenu" data-behavior="notification-items">
-
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu" data-behavior="notification-items">
             <ul><span class ="glyphicon glyphicon-heart"></span> You have no Nofications at the moment! post a review! </ul>
           </ul>
         </li>
-        
         <li class="dropdown">
-
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <%= current_user.first_name %> <%= current_user.last_name %> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-             
-              <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
-            </ul>
+        <ul class="dropdown-menu">    
+            <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+            <li role="separator" class="divider"></li>
+         <% if user_signed_in? && current_user.admin? %> 
+            <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
+            <li><%= link_to "Dashboard", rails_admin_path %></li>
+            <li> <%= link_to 'Pending Requests', requests_path %> </li> 
+            <li> <%= link_to Request.count %> </li>
+            <% end %> 
+             <li role="separator" class="divider"></li>
+             <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          </ul>
           </li>
-
-          <% else %>
+        <% else %>
          <!--<li><%= link_to "Sign Up", new_user_registration_path %></li>-->
-         
           <li><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
 
 

@@ -11,13 +11,13 @@
           </p>
 
             <p> <% if @avg_rating < 1.0 %>
-              <span class="label label-default">Nobody knows</span>
+              <span class="label label-default">Unknown</span>
               <% elsif @avg_rating  <= 1.5 %>
-             <span class="label label-danger">Dangerous Brand</span>
+             <span class="label label-danger">Terrible Choice</span>
                  <% elsif @avg_rating  <= 2 %>
-                 <span class="label label-warning">Be Warned</span>
+                 <span class="label label-warning">Below Average</span>
                   <% elsif @avg_rating <= 3 %>
-                  <span class="label label-info">Average Brand</span>
+                  <span class="label label-info">Good Brand</span>
                   <% elsif @avg_rating <= 4 %>
                   <span class="label label-primary">Trustworthy Brand</span>
                   <% else @avg_rating > 4  %>

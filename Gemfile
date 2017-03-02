@@ -41,4 +41,5 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'omniauth-facebook'
 gem 'rails_admin', '~> 1.0'
 gem 'social-share-button', '~> 0.1.6'
-
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'

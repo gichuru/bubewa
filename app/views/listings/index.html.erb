@@ -56,6 +56,7 @@
 
 
 <div class="row, text-align: center">
+
   <% @listings.each do |listing| %>
   
     <div class="col-md-3">
@@ -92,6 +93,8 @@
     </div>
 
 <% end %>
+ <%= will_paginate @listings, renderer: BootstrapPagination::Rails %>
+  <br>
 </div>
 
 <script>

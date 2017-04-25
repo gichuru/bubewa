@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170217081229) do
+ActiveRecord::Schema.define(version: 20170425152106) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -25,11 +25,13 @@ ActiveRecord::Schema.define(version: 20170217081229) do
     t.string   "phone"
     t.string   "email"
     t.string   "website"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "image"
     t.string   "title"
     t.integer  "category_id"
+    t.decimal  "avg_rating",    default: "0.0", null: false
+    t.integer  "total_reviews", default: 0,     null: false
   end
 
   create_table "notifications", force: :cascade do |t|

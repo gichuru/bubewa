@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_user! 
+  before_action :authenticate_user!
   before_action :set_listing
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
 
   def user
     @user = User.all
-    
+
   end
 
 def send_notifications(type)
@@ -35,6 +35,7 @@ def send_notifications(type)
 
     respond_to do |format|
         if @review.save
+          get_average_review @review
           send_notifications("Posted a NEW Item and has invited YOU to REVIEW IT.")
           format.html { redirect_to @listing, notice: 'Your review was successfully posted.' }
           format.json { render :show, status: :created, location: @review }
@@ -87,6 +88,13 @@ def send_notifications(type)
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def get_average_review review
+        reviews = Review.where(listing_id: review.listing_id)
+
+        avg_rating = reviews.average(:rating).round(2)
+        Listing.find(review.listing_id).update_attributes(
+            avg_rating: avg_rating, total_reviews: reviews.length)
+    end
 
     def set_review
       @review = Review.find_by(:id => params[:id])
@@ -111,5 +119,5 @@ def send_notifications(type)
     def review_params
       params.require(:review).permit(:rating, :comment)
     end
-   
+
 end

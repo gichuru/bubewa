@@ -1,3 +1,7 @@
+<%- provide(:title, @listing.name) %>
+<%- provide(:description, @listing.description) %>
+<%- provide(:page_url, listing_url(@listing)) %>
+<%- provide(:page_image, @listing.image_url(:medium)) %>
 
 <div class="row">
   <div class="col-md-3">
@@ -6,7 +10,7 @@
       <p class="small"> <%= @listing.title %>
         </p>
           <div class="star-rating" data-score= <%= @avg_rating  %> >
-          </div> 
+          </div>
           <p class="small text-left "> (<%= "#{@reviews.length} reviews" %>) Average rating: <kbd><%= @avg_rating  %> /5</kbd>
           </p>
 
@@ -25,13 +29,13 @@
               <% end %></p>
 
 
-          <i><%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings") %> Share to get reviews from your friends</i> 
+          <i><%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings") %> Share to get reviews from your friends</i>
 
-           
+
 
 
           <hr>
-              <p>         
+              <p>
                 <strong>About:</strong>
                 <p><%= h(@listing.description).gsub(/\n/, '<br/>').html_safe %></p>
               </p>
@@ -44,7 +48,7 @@
               <strong>Email:</strong>
               <%= mail_to @listing.email %> <br>
               <strong>Website:</strong>
-              <%= link_to @listing.website, @listing, target: :_blank %>
+              <%= link_to @listing.website, @listing.website, target: :_blank %>
             </address>
   </div>
 
@@ -59,23 +63,23 @@
               <th class="col-md-9"></th>
 
             </tr>
-          </thead>           
+          </thead>
           <tbody>
-            
+
               <% if @reviews.blank? %>
                <td>
                     <p>Be the first to post a review!</p>
                     </td>
             <% else %>
             <tr>
-            
-                <% @reviews.each do |review| %> 
+
+                <% @reviews.each do |review| %>
                     <td>
                       <Strong> <%= "#{review.user.first_name.capitalize} #{review.user.last_name.capitalize[0]}." %>
                       </Strong>
                       <br>
                      <i class = "small ">Posted <%= time_ago_in_words(review.created_at) %> ago</i>
-                        <!-- Number of reviews -->    
+                        <!-- Number of reviews -->
                     </td>
                 <td>
                       <div class="row">
@@ -89,27 +93,27 @@
                       <p><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %>
                       </p>
                   <div class="row">
-                      <div class="col-md-4 small "> 
+                      <div class="col-md-4 small ">
                           <%= link_to listing_review_upvote_path(@listing.id, review.id), method: :put do %>
                           <span class ="glyphicon glyphicon-thumbs-up">
                           </span> <%= review.get_upvotes.size %>
-                          <% end %> 
-                          <%= link_to listing_review_downvote_path(@listing.id, review.id), method: :put do %> 
+                          <% end %>
+                          <%= link_to listing_review_downvote_path(@listing.id, review.id), method: :put do %>
                           <span class ="glyphicon glyphicon-flag">
-                          </span>  <%= review.get_downvotes.size %> 
-                        <% end %> 
+                          </span>  <%= review.get_downvotes.size %>
+                        <% end %>
                       </div>
 
                       <div class="col-md-4"></div>
                       <div class="col-md-4 text-right">
                           <% if user_signed_in? %>
                           <% if (review.user == current_user) || (current_user.admin?) %>
-                          <%= link_to "Update", edit_listing_review_path(@listing, review), class: "text-left"  %> | 
-                          <%= link_to "", listing_review_path(@listing, review), method: :delete, class: "glyphicon glyphicon-trash"  %> 
+                          <%= link_to "Update", edit_listing_review_path(@listing, review), class: "text-left"  %> |
+                          <%= link_to "", listing_review_path(@listing, review), method: :delete, class: "glyphicon glyphicon-trash"  %>
                         <% end %>
                       <% end %>
                       </div>
-                  </div>                      
+                  </div>
                 </td>
               </tr>
               <% end %>

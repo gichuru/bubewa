@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bubewa : Kenyan ratings and reviews community, products, services, public servants and institutions </title>
+    <title>Bubewa | <%= page_title(yield(:title))%> </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="Bubewa | <%= page_title(yield(:title))%>"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="<%= yield(:page_url) %>"/>
+    <meta property="og:description" content="<%= yield(:description) %>"/>
+    <meta property="og:image" content="<%= yield(:page_image) %>"/>
+
+    <meta name="twitter:card" content="website"/>
+    <meta name="twitter:image" content="<%= yield(:page_image) %>"/>
+    <meta name="twitter:image:width" content="100"/>
+    <meta name="twitter:image:height" content="100"/>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -69,14 +81,14 @@
               </div>
             <% end %>
           <% end %>
-        
- 
+
+
           <!-- Start footer here -->
-          <%= yield %> 
+          <%= yield %>
           <br>
           </div>
         <hr>
           <%= render 'layouts/footer' %>
-            
+
         </body>
 </html>

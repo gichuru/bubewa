@@ -14,17 +14,18 @@
     <!-- Here are our static pages  -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+          <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "About", pages_about_path %></li>
-        <li><%= link_to "How it Works", pages_how_path %></li>   
+        <li><%= link_to "How it Works", pages_how_path %></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse by Categories <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <% Category.all.each do |category| %>
               <li><%= link_to category.name, listings_path(category: category.id)  %></li>
               <li role="separator" class="divider"></li>
-              <%end%>     
+              <%end%>
             </ul>
-              <li><%= link_to " ", new_user_session_path %></li> 
+              <li><%= link_to " ", new_user_session_path %></li>
           </li>
       </ul>
 
@@ -45,17 +46,17 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <%= current_user.first_name %> <%= current_user.last_name %> <b class="caret"></b></a>
-        <ul class="dropdown-menu">    
+        <ul class="dropdown-menu">
             <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
             <li role="separator" class="divider"></li>
-         <% if user_signed_in? && current_user.admin? %> 
+         <% if user_signed_in? && current_user.admin? %>
             <li> <%= link_to 'Add New Listing', new_listing_path %> </li>
             <li><%= link_to "Dashboard", rails_admin_path %></li>
-            <li> <%= link_to 'Pending Requests', requests_path %> </li> 
+            <li> <%= link_to 'Pending Requests', requests_path %> </li>
             <li> <%= link_to Request.count %> </li>
              <li role="separator" class="divider"></li>
-            <% end %> 
-            
+            <% end %>
+
              <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
           </ul>
           </li>

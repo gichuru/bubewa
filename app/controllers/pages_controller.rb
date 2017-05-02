@@ -21,7 +21,7 @@ class PagesController < ApplicationController
   end
 
   def search
-      redirect_to root_url unless params[:query]
+      redirect_to root_url unless params[:query] || params[:query].blank?
 
       @query = params[:query]
       @listings = Listing.text_search(@query)

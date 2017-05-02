@@ -51,45 +51,48 @@
 
 </div>
 
-<%- @listings.each_slice(3) do |chunked| %>
-    <div class="row" style="text-align: center">
-        <%- chunked.each do |listing| %>
-            <div class="col-md-3">
-                <div class="thumbnail">
-                    <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
-                    <div class="caption">
-                        <strong><%= link_to listing.name, listing %></strong>
-                        <p class = "small"><%= listing.title %><br>
-                            Requested <%= time_ago_in_words(listing.created_at) %> ago
-                        </p>
-                        <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
-                        <!-- <% reviews = Review.where(listing_id: listing.id) %>
-                          <% if reviews.blank? %>
-                            <% avg_rating = 0 %>
-                          <% else %>
-                            <% avg_rating = reviews.average(:rating).round(2) %>
-                          <% end %> -->
-                        <div class="star-rating" data-score= <%= listing.avg_rating %> ></div>
-                        <strong>Average score: </strong> <kbd><%= listing.avg_rating  %>/5 </kbd> <br>
-                        <p> See the <%= link_to "#{listing.total_reviews} reviews", listing %></p>
+<div class="row, text-align: center">
 
-                        <!-- Editing links -->
-                        <hr>
-                        <%= link_to 'Post Your Review', listing, class: "btn btn-info"  %>
-                        <% if user_signed_in? && current_user.admin? %>
-                            <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
-                                <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %>
-                            </p>
-                        <% end %>
-                    </div>
-                </div>
+
+  <% @listings.each do |listing| %>
+
+    <div class="col-md-3">
+            <div class="thumbnail">
+              <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
+              <div class="caption">
+                <strong><%= link_to listing.name, listing %></strong>
+                <p class = "small"><%= listing.title %><br>
+                  Requested <%= time_ago_in_words(listing.created_at) %> ago
+                </p>
+                <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
+                <!-- <% reviews = Review.where(listing_id: listing.id) %>
+                  <% if reviews.blank? %>
+                    <% avg_rating = 0 %>
+                  <% else %>
+                    <% avg_rating = reviews.average(:rating).round(2) %>
+                  <% end %> -->
+
+                    <div class="star-rating" data-score= <%= listing.avg_rating %> ></div>
+                    <strong>Average score: </strong> <kbd><%= listing.avg_rating  %>/5 </kbd> <br>
+                   <p> See the <%= link_to "#{listing.total_reviews} reviews", listing %></p>
+
+
+                <!-- Editing links -->
+                <hr>
+                <%= link_to 'Post Your Review', listing, class: "btn btn-info"  %>
+                  <% if user_signed_in? && current_user.admin? %>
+                      <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
+                     <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p>
+              <% end %>
+
+              </div>
             </div>
-        <% end %>
-        <br>
-        <%= will_paginate @listings, renderer: BootstrapPagination::Rails %>
     </div>
-<% end %>
 
+<% end %>
+ <%= will_paginate @listings, renderer: BootstrapPagination::Rails %>
+  <br>
+</div>
 
 <script>
   $('.star-rating').raty({

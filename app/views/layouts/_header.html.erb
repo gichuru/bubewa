@@ -28,7 +28,14 @@
               <li><%= link_to " ", new_user_session_path %></li>
           </li>
       </ul>
-
+      <%= form_tag('/search', method: :get, class: 'navbar-form navbar-left') do %>
+          <div class="form-group">
+              <div class="input-group" style="width: 150%">
+                  <input type="text" name="query" class="form-control" id="headerSearch" placeholder="What are you looking for?">
+                  <div class="input-group-addon bg-primary header-search-addon"><span class="glyphicon glyphicon-search"></span></div>
+              </div>
+          </div>
+      <%- end %>
       <!--Right navigation: Lets ensure a user is an admin before we allow them to add a Listing -->
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to 'Post an item for review', new_request_path %></li>

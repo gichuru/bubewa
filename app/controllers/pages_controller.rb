@@ -19,4 +19,11 @@ class PagesController < ApplicationController
 
   def guidelines
   end
+
+  def search
+      redirect_to root_url unless params[:query]
+
+      @query = params[:query]
+      @listings = Listing.text_search(@query)
+  end
 end

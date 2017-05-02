@@ -27,9 +27,11 @@ Rails.application.routes.draw do
 
   get 'pages/guidelines'
 
+  get "/search" => "pages#search",   as: :search
+
   root 'listings#index'
 
-  resources :notifications do 
+  resources :notifications do
     collection do
       post :mark_as_read
     end

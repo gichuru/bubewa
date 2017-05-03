@@ -12,4 +12,16 @@ namespace :populate do
           end
       end
   end
+
+  task listings: :environment do
+      Category.all.each do |category|
+          16.times do |i|
+              listing = category.listings.new(name: Faker::Company.name, description: Faker::Lorem.paragraph,
+                address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone,
+                email: Faker::Internet.email, website: Faker::Internet.url, title: Faker::Company.suffix)
+              listing.remote_image_url = Faker::Avatar.image
+              listing.save!
+          end
+      end
+  end
 end

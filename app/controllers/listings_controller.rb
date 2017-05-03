@@ -58,9 +58,9 @@ class ListingsController < ApplicationController
       end
     end
   end
-  
+
   # Show the reviews under each restaurant by decending order, also takes care of the blank reviews.
-    
+
     def show
       @reviews = Review.where(listing_id: @listing.id).order("created_at DESC")
       if @reviews.blank?
@@ -68,6 +68,7 @@ class ListingsController < ApplicationController
       else
         @avg_rating = @reviews.average(:rating).round(2)
       end
+      @review = @listing.reviews.new
       @notifications = Notification.all
     end
 

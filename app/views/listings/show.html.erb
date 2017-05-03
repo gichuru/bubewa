@@ -53,9 +53,23 @@
   </div>
 
   <div class="col-md-9">
-      <div class="col-md-11">
-      <%= link_to "Add your Review ", new_listing_review_path(@listing), class: "btn btn-info" %>
+      <div class="row">
+          <div class="col-md-12">
+              <%#= link_to "Add your Review ", new_listing_review_path(@listing), class: "btn btn-info" %>
+              <div class="review-btn-container">
+                  <%= link_to "Add your Review ", "#", class: "btn btn-info review-btn" %>
+                  <br><br>
+              </div>
+
+              <div class="well review-form-container" style="border: none; display: none;">
+                    <span style="cursor: pointer;" class="glyphicon glyphicon-remove pull-right text-danger close-review"></span>
+                    <h4 style="margin: -2px; margin-bottom: 10px;">Whats your rating of <%= @listing.name %>? </h4>
+                    <%= render 'reviews/form', review: @review %>
+              </div>
+          </div>
       </div>
+
+      <h4 style="margin-top: -2px; display: none;" class="text-info reviews-title">Reviews</h4>
       <table class="table">
         <thead>
             <tr>
@@ -120,6 +134,8 @@
             <% end %>
           </tbody>
         </table>
+
+
   </div>
 </div>
   <br>

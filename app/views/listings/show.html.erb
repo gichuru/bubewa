@@ -29,7 +29,7 @@
               <% end %></p>
 
 
-          <i><%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings") %> Share to get reviews from your friends</i>
+          <i><%= social_share_button_tag("Rate and Review", :url =>"http://www.bubewa.com/listings/#{@listing.id}") %> Share to get reviews from your friends</i>
 
 
 
@@ -54,7 +54,16 @@
 
   <div class="col-md-9">
       <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 hidden-xs">
+              <div class="row">
+                <div class="col-md-9">
+                  <div style="height: 300px;" class="well">
+                Ad Banner goes here
+              </div>    
+                </div>
+                <div class="col-md-3"></div>
+              </div>
+              
               <%#= link_to "Add your Review ", new_listing_review_path(@listing), class: "btn btn-info" %>
               <div class="review-btn-container">
                   <%= link_to "Add your Review ", "#", class: "btn btn-info review-btn" %>

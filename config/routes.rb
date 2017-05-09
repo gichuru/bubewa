@@ -29,7 +29,8 @@ Rails.application.routes.draw do
 
   get "/search" => "pages#search",   as: :search
 
-  root 'listings#index'
+  # root 'listings#index'
+  root 'pages#home'
 
   resources :notifications do
     collection do

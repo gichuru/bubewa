@@ -14,3 +14,18 @@
  *= require social-share-button
  *= require_self
  */
+
+.bg-success {
+	background-color: #5cb85c !important;
+	color: #fff;
+}
+
+.bg-info {
+	background-color: #5bc0de !important;
+	color: #fff;
+}
+
+.bg-danger {
+	background-color: #d9534f !important;
+	color: #fff;
+}

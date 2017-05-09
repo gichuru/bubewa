@@ -108,7 +108,7 @@
     </div>
     <% end %>
     <div class="text-center">
-        <%= link_to "view more", '#', class: 'btn btn-primary' %>
+        <%= link_to "view more", trending_listings_path, class: 'btn btn-primary' %>
         <%#= will_paginate @listings, renderer: BootstrapPagination::Rails %>
     </div>
 </div>
@@ -169,7 +169,7 @@
     </div>
     <% end %>
     <div class="text-center">
-    <%= link_to "view more", '#', class: 'btn btn-primary' %>
+    <%= link_to "view more", recent_listings_path, class: 'btn btn-primary' %>
         <%#= will_paginate @listings, renderer: BootstrapPagination::Rails %>
     </div>
 </div>
@@ -231,7 +231,7 @@
     </div>
     <% end %>
     <div class="text-center">
-      <%= link_to "view more", '#', class: 'btn btn-primary' %>
+      <%= link_to "view more", worst_rated_listings_path, class: 'btn btn-primary' %>
         <%#= will_paginate @listings, renderer: BootstrapPagination::Rails %>
     </div>
 </div>

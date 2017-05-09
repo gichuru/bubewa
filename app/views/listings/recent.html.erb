@@ -1,0 +1,31 @@
+<!--<p id="notice"><%= notice %></p>-->
+
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+      <h3 class="bg-info" style="
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                margin-bottom: 10px;">New Listings</h3>
+      <br>
+    </div>
+</div>
+
+
+
+<%= render 'listings' %>
+
+
+
+
+
+<script>
+  $('.star-rating').raty({
+    path: 'https://s3.eu-west-2.amazonaws.com/bebuwaphotos/uploads/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>
+
+<br>

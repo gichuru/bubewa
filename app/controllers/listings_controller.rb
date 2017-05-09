@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_user, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :recent, :worst_rated, :trending]
+  before_action :check_user, except: [:index, :show, :recent, :worst_rated, :trending]
 
   # GET /listings
   # GET /listings.json
@@ -81,6 +81,20 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def recent
+    @listings = Listing.latest.paginate(:page => params[:page], :per_page => 12)
+  end
+
+  def trending
+    @listings = Listing.trending.paginate(:page => params[:page], :per_page => 12)
+    
+  end
+
+  def worst_rated
+    @listings = Listing.worst.paginate(:page => params[:page], :per_page => 12)
   end
 
   private

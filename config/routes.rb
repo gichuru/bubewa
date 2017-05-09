@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => 'omniauth_callbacks' }
 
   resources :listings do
+    collection do
+      get :recent
+      get :trending
+      get :worst_rated
+    end
+    
     resources :reviews, except: [:show, :index] do
       put "upvote", to: "reviews#upvote"
       put "downvote", to: "reviews#downvote"

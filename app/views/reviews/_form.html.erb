@@ -16,10 +16,10 @@
     </div>
   <% end %>
 
-  <div id="star-rating"></div>
+  <h4>Whats your rating of <%= @listing.name %>? &nbsp; <span id="star-rating"></span></h4>  
   <br>
   <div class="form-group">
-    <%= f.label :comment %>
+    <%#= f.label :comment %>
     <%= f.text_area :comment, class: "form-control", placeholder: "Tell us why?" %>
   </div>
 

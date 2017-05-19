@@ -56,29 +56,52 @@
       <div class="row">
           <div class="col-md-12 hidden-xs">
               <div class="row">
-                <div class="col-md-9">
-                  <div style="height: 300px;" class="well">
-                Ad Banner goes here
-              </div>    
+                <div class="col-md-12">
+                  <div style="height: 300px; background: url('/images/coke.jpg'); margin-bottom: 0;" class="well" >
+
+                  </div>
+
                 </div>
-                <div class="col-md-3"></div>
+                <!-- <div class="col-md-3" id="claim-reward">
+                    <%= image_tag('1.png') %>
+                </div> -->
               </div>
-              
+
+              <div class="row progress-section" style="height: 5px;">
+                  <div class="col-md-12">
+                      <div class="progress" style="height: 5px; margin-bottom: 0; display: none;">
+                          <div class="progress-bar progress-bar-success"
+                            role="progressbar"
+                            aria-valuenow="0"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="width: 0%">
+                                <span class="sr-only">40% Complete (success)</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
               <%#= link_to "Add your Review ", new_listing_review_path(@listing), class: "btn btn-info" %>
-              <div class="review-btn-container">
-                  <%= link_to "Add your Review ", "#", class: "btn btn-info review-btn" %>
+
+              <div class="review-btn-container" style="margin-top: 10px;">
+                  <div class="pull-right">
+                        <%= link_to "Claim Reward ", "#", class: "btn btn-success reward-btn" %>
+                  </div>
+
+                  <%#= link_to "Add your Review ", "#", class: "btn btn-info review-btn" %>
                   <br><br>
               </div>
 
               <div class="well review-form-container" style="border: none; display: none;">
                     <span style="cursor: pointer;" class="glyphicon glyphicon-remove pull-right text-danger close-review"></span>
                     <h4 style="margin: -2px; margin-bottom: 10px;">Whats your rating of <%= @listing.name %>? </h4>
-                    <%= render 'reviews/form', review: @review %>
+                    <%#= render 'reviews/form', review: @review %>
               </div>
           </div>
       </div>
 
-      <h4 style="margin-top: -2px; display: none;" class="text-info reviews-title">Reviews</h4>
+      <h4 style="margin-top: -2px;" class="text-info reviews-title">Reviews</h4>
       <table class="table">
         <thead>
             <tr>
@@ -89,11 +112,17 @@
           </thead>
           <tbody>
 
+
               <% if @reviews.blank? %>
                <td>
                     <p>Be the first to post a review!</p>
                     </td>
             <% else %>
+            <tr>
+                <td colspan="2">
+                    <%= render 'reviews/form', review: @review %>
+                </td>
+            </tr>
             <tr>
 
                 <% @reviews.each do |review| %>

@@ -12,7 +12,7 @@
 }
 
 h1, h2, h3, h4, h5, h6 {
-    
+
     color: #1a1a1a;
     text-transform: capitalize;
     margin-top: 0.8em;
@@ -163,7 +163,13 @@ kbd {
 }
 
 .footer{
-  
+
   padding-right: 20px;
   text-size: 10px;
+}
+
+.header-search-addon {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
 }

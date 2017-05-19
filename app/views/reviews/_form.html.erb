@@ -1,10 +1,11 @@
-<%= form_for([@listing, @review]) do |f| %>
 
+
+<%= form_for([@listing, @review || review]) do |f| %>
   <% if review.errors.any? %>
 
     <div id="error_explanation" class= "alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      
+
       <h4>opps! sorry, <%= pluralize(review.errors.count, "error") %> prohibited your review from being saved:</h4>
 
       <ul>
@@ -15,14 +16,14 @@
     </div>
   <% end %>
 
-  <div id="star-rating"></div>
-
+  <h4>Whats your rating of <%= @listing.name %>? &nbsp; <span id="star-rating"></span></h4>  
+  <br>
   <div class="form-group">
-    <%= f.label :comment %>
+    <%#= f.label :comment %>
     <%= f.text_area :comment, class: "form-control", placeholder: "Tell us why?" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" style="margin-bottom: 0;">
     <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

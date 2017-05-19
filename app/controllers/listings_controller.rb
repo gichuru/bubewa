@@ -1,13 +1,13 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
-  before_action :check_user, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :recent, :worst_rated, :trending]
+  before_action :check_user, except: [:index, :show, :recent, :worst_rated, :trending]
 
   # GET /listings
   # GET /listings.json
   def index
     if params[:category].blank?
-      @listings = Listing.all.paginate(:page => params[:page], :per_page => 12)
+      @listings = Listing.all.paginate(:page => params[:page], :per_page => 4)
     else
       @category_id = Category.find(params[:category]).id
       @listings = Listing.where(category_id: @category_id).order("created_at DESC").paginate(:page => params[:page], :per_page => 12)
@@ -58,9 +58,9 @@ class ListingsController < ApplicationController
       end
     end
   end
-  
+
   # Show the reviews under each restaurant by decending order, also takes care of the blank reviews.
-    
+
     def show
       @reviews = Review.where(listing_id: @listing.id).order("created_at DESC")
       if @reviews.blank?
@@ -68,6 +68,7 @@ class ListingsController < ApplicationController
       else
         @avg_rating = @reviews.average(:rating).round(2)
       end
+      @review = @listing.reviews.new
       @notifications = Notification.all
     end
 
@@ -80,6 +81,20 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def recent
+    @listings = Listing.latest.paginate(:page => params[:page], :per_page => 12)
+  end
+
+  def trending
+    @listings = Listing.trending.paginate(:page => params[:page], :per_page => 12)
+    
+  end
+
+  def worst_rated
+    @listings = Listing.worst.paginate(:page => params[:page], :per_page => 12)
   end
 
   private

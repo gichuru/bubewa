@@ -1,0 +1,250 @@
+<!--<p id="notice"><%= notice %></p>-->
+
+<div class="row">
+    <div class="col-md-12" style="text-align: center">
+    <% if user_signed_in? %>
+     <p>Hey <strong><%= current_user.first_name %></strong> , We are looking forward to your reviews today... 1 review a day keeps bad products, services and governance a way </p>
+
+     <% else %>
+
+      <div class"heading-block">
+        <h2 class="heading">Bubewa:
+        <span class="color1">Ratings </span> and
+        <span class="color1">Reviews</span>
+        Platform
+        </h2>
+          <p class ="small"> Saves you money and headaches by working as a community</p>
+      </div>
+      <hr>
+
+      <p class ="sub-heading">
+
+        <!--<b class="color1">"Caveat emptor"</b> is a Latin term that means <b class="color1">"let the buyer beware."</b> Similar to the phrase <b class="color1">"sold as is,"</b> this term means that the buyer assumes the risk that a product may fail to meet expectations or have defects. <br>
+        - We help each other avoid <i>drama</i> na kizungu mingi -
+      </p> -->
+      <div class="col-md-12 text-align: center">
+
+      <div class="col-md-4">
+        <h4>Step 1: Earn User Points</h4>
+       <p class ="small"> You start by reviewing products to earn user points (Minimum 5 reviews). User points enable you to post a product or service to be reviewed by the community. <br>Start with the latest item below</p>
+
+      </div>
+
+      <div class="col-md-4">
+         <h4>Step 2: Request Reviews </h4>
+
+        <p class ="small"> You get a sharable link to your item, share it with your friends on facebook and whatsApp groups and watch the reviews stream in. Remember the best reviews are from your own friends</p></div>
+
+    <div class="col-md-4">
+       <h4>Step 3: Decide!</h4>
+
+      <p class ="small"> Now you can confidently make a decision if to spend your money or not on your purchase. Upvote useful reviews and flag those that need more information to earn more points. </p></div> <br><br>
+
+    </div>
+    <!--<%= link_to 'Click to Request Reviews on an Item', new_listing_path, class: "btn btn-info" %> -->
+
+    <p><%= link_to 'Post an item for review', new_request_path, class: "btn btn-info" %></p>
+    <p class ="small">Have enough points and you cant request a review? <i> <%= link_to 'click here', new_request_path, class: "btn-link" %></i></p>
+    <% end %>
+     <hr>
+
+    </div>
+</div>
+
+
+<div class="trending">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4 class="bg-success" style="
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                margin-bottom: 10px;">Trending</h4>
+
+        </div>
+    </div>
+    <% @trending.each_slice(4) do |chunked| %>
+
+    <div class="row" style="text-align: center">
+
+
+      <% chunked.each do |listing| %>
+
+        <div class="col-md-3">
+                <div class="thumbnail">
+                  <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
+                  <div class="caption">
+                    <strong><%= link_to listing.name, listing %></strong>
+                    <p class = "small"><%= listing.title %><br>
+                      Requested <%= time_ago_in_words(listing.created_at) %> ago
+                    </p>
+                    <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
+                    <!-- <% reviews = Review.where(listing_id: listing.id) %>
+                      <% if reviews.blank? %>
+                        <% avg_rating = 0 %>
+                      <% else %>
+                        <% avg_rating = reviews.average(:rating).round(2) %>
+                      <% end %> -->
+
+                        <div class="star-rating" data-score= <%= listing.avg_rating %> ></div>
+                        <strong>Average score: </strong> <kbd><%= listing.avg_rating  %>/5 </kbd> <br>
+                       <p> See the <%= link_to "#{listing.total_reviews} reviews", listing %></p>
+
+
+                    <!-- Editing links -->
+                    <hr>
+                    <%= link_to 'Post Your Review', listing, class: "btn btn-info"  %>
+                      <% if user_signed_in? && current_user.admin? %>
+                          <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
+                         <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p>
+                  <% end %>
+
+                  </div>
+                </div>
+        </div>
+
+    <% end %>
+
+      <br>
+    </div>
+    <% end %>
+    <div class="text-center">
+        <%= link_to "view more", trending_listings_path, class: 'btn btn-primary' %>
+        <%#= will_paginate @listings, renderer: BootstrapPagination::Rails %>
+    </div>
+</div>
+
+<div class="new-listings">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4 class="bg-info" style="
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                margin-bottom: 10px;">New Listings</h4>
+
+        </div>
+    </div>
+    <% @latest.each_slice(4) do |chunked| %>
+
+    <div class="row" style="text-align: center">
+
+
+      <% chunked.each do |listing| %>
+
+        <div class="col-md-3">
+                <div class="thumbnail">
+                  <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
+                  <div class="caption">
+                    <strong><%= link_to listing.name, listing %></strong>
+                    <p class = "small"><%= listing.title %><br>
+                      Requested <%= time_ago_in_words(listing.created_at) %> ago
+                    </p>
+                    <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
+                    <!-- <% reviews = Review.where(listing_id: listing.id) %>
+                      <% if reviews.blank? %>
+                        <% avg_rating = 0 %>
+                      <% else %>
+                        <% avg_rating = reviews.average(:rating).round(2) %>
+                      <% end %> -->
+
+                        <div class="star-rating" data-score= <%= listing.avg_rating %> ></div>
+                        <strong>Average score: </strong> <kbd><%= listing.avg_rating  %>/5 </kbd> <br>
+                       <p> See the <%= link_to "#{listing.total_reviews} reviews", listing %></p>
+
+
+                    <!-- Editing links -->
+                    <hr>
+                    <%= link_to 'Post Your Review', listing, class: "btn btn-info"  %>
+                      <% if user_signed_in? && current_user.admin? %>
+                          <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
+                         <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p>
+                  <% end %>
+
+                  </div>
+                </div>
+        </div>
+
+    <% end %>
+
+      <br>
+    </div>
+    <% end %>
+    <div class="text-center">
+    <%= link_to "view more", recent_listings_path, class: 'btn btn-primary' %>
+        <%#= will_paginate @listings, renderer: BootstrapPagination::Rails %>
+    </div>
+</div>
+
+
+<div class="worst-rated">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4 class="bg-danger" style="
+                padding-top: 0.8em;
+                padding-bottom: 0.8em;
+                margin-bottom: 10px;">Worst Rated</h4>
+
+        </div>
+    </div>
+    <% @worst.each_slice(4) do |chunked| %>
+
+    <div class="row" style="text-align: center">
+
+
+      <% chunked.each do |listing| %>
+
+        <div class="col-md-3">
+                <div class="thumbnail">
+                  <%= image_tag listing.image_url (:medium) unless listing.image.blank? %>
+                  <div class="caption">
+                    <strong><%= link_to listing.name, listing %></strong>
+                    <p class = "small"><%= listing.title %><br>
+                      Requested <%= time_ago_in_words(listing.created_at) %> ago
+                    </p>
+                    <!--Put homepage rankings here, stars, reviews and status, i.e danger,warning -> incase Ineed it, it goes to the next line -> .order("created_at DESC")-->
+                    <!-- <% reviews = Review.where(listing_id: listing.id) %>
+                      <% if reviews.blank? %>
+                        <% avg_rating = 0 %>
+                      <% else %>
+                        <% avg_rating = reviews.average(:rating).round(2) %>
+                      <% end %> -->
+
+                        <div class="star-rating" data-score= <%= listing.avg_rating %> ></div>
+                        <strong>Average score: </strong> <kbd><%= listing.avg_rating  %>/5 </kbd> <br>
+                       <p> See the <%= link_to "#{listing.total_reviews} reviews", listing %></p>
+
+
+                    <!-- Editing links -->
+                    <hr>
+                    <%= link_to 'Post Your Review', listing, class: "btn btn-info"  %>
+                      <% if user_signed_in? && current_user.admin? %>
+                          <p> <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %> |
+                         <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %></p>
+                  <% end %>
+
+                  </div>
+                </div>
+        </div>
+
+    <% end %>
+
+      <br>
+    </div>
+    <% end %>
+    <div class="text-center">
+      <%= link_to "view more", worst_rated_listings_path, class: 'btn btn-primary' %>
+        <%#= will_paginate @listings, renderer: BootstrapPagination::Rails %>
+    </div>
+</div>
+
+
+<script>
+  $('.star-rating').raty({
+    path: 'https://s3.eu-west-2.amazonaws.com/bebuwaphotos/uploads/stars',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    }
+  });
+</script>
+
+<br>

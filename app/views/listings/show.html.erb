@@ -112,17 +112,18 @@
           </thead>
           <tbody>
 
-
+              <tr>
+                  <td colspan="2">
+                      <%= render 'reviews/form', review: @review %>
+                  </td>
+              </tr>
+              
               <% if @reviews.blank? %>
                <td>
                     <p>Be the first to post a review!</p>
                     </td>
             <% else %>
-            <tr>
-                <td colspan="2">
-                    <%= render 'reviews/form', review: @review %>
-                </td>
-            </tr>
+
             <tr>
 
                 <% @reviews.each do |review| %>
